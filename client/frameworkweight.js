@@ -8,7 +8,7 @@ import css from './styles/style.styl';
 
 // Import components
 
-import Main from './components/Main.js';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // import material design
@@ -16,10 +16,20 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 injectTapEventPlugin();
 
+//redux
+import { Provider } from 'react-redux';
+
+import store from './store.js';
+
+import AppFrameworkWeight from './components/AppFrameworkWeight'
+
 const App = () => (
 <MuiThemeProvider>
-  <Main/>
+  <AppFrameworkWeight/>
 </MuiThemeProvider>
+
 );
 
-render(<App/>, document.getElementById('root'));
+render(<Provider store={ store }>
+         <App/>
+       </Provider>, document.getElementById('root'));

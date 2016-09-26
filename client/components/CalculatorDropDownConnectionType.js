@@ -1,6 +1,10 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/actionCreators.js';
+
 
 const styles = {
   customWidth: {
@@ -8,43 +12,45 @@ const styles = {
   },
 };
 
-export default class CalculatorDropDownConnectionType extends React.Component {
+class CalculatorDropDownConnectionType extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      value: 1
+      value: 0
     };
   }
 
-  // handleChange = (event, index, value) => this.setState({
-  //   value
-  // });
+  handleChange = (event, index, value) => this.setState({
+    value
+  });
 
   render() {
     return (
       <div>
         <DropDownMenu
-                      value={ this.state.value }
+                      value={ this.props.progress.selectedbandwidthType }
                       onChange={ this.handleChange }>
-          <MenuItem
-                    value={ 1 }
-                    primaryText="Mobile 2G - (35 Kbps)" />
-          <MenuItem
-                    value={ 2 }
-                    primaryText="Mobile 2G - (35 Kbps)" />
-          <MenuItem
-                    value={ 3 }
-                    primaryText="Mobile 2G - (35 Kbps)" />
-          <MenuItem
-                    value={ 4 }
-                    primaryText="Mobile 2G - (35 Kbps)" />
-          <MenuItem
-                    value={ 5 }
-                    primaryText="Mobile 2G - (35 Kbps)" />
+          { this.props.progress.bandwidthTypes.map((bandwidthType, i) => <MenuItem
+                                                                                   value={ i }
+                                                                                   primaryText={ bandwidthType } />) }
         </DropDownMenu>
         <br />
       </div>
       );
   }
 }
+function mapStateToProps(state) {
+  return {
+    libraries: state.libraries,
+    progress: state.progress
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return bindActionCreators(actionCreators, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CalculatorDropDownConnectionType);
+

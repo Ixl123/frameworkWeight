@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './client/pbas'
+    './client/frameworkweight'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -22,14 +22,19 @@ module.exports = {
       {
         test: /\.js$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'client')
+        include: path.join(__dirname, 'client'),
       },
       // CSS
       {
         test: /\.styl$/,
         include: path.join(__dirname, 'client'),
         loader: 'style-loader!css-loader!stylus-loader'
-      }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css?modules',
+        include: /flexboxgrid/
+      },
     ]
   }
 };

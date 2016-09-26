@@ -3,25 +3,32 @@ import { Link } from 'react-router';
 import Calculator from './Calculator.js'
 import Libraries from './Libraries.js'
 import AppBar from 'material-ui/AppBar';
-
+import ProgressStepper from './ProgressStepper.js'
+const {Grid, Row, Col} = require('react-flexbox-grid');
 const Main = React.createClass({
   render() {
     return (
-
       <div>
         <AppBar
-                title="PBAS"
+                title="FrameworkWeight"
                 showMenuIconButton={ false } />
-        <h1><Link> PBAS </Link></h1>
-        <h2>which frontend library can I use?</h2>
-        <div className="row center-xs">
-          <div class="col-xs-8">
-            <div class="box">
-              <Calculator></Calculator>
-              <Libraries></Libraries>
-            </div>
-          </div>
-        </div>
+        <Grid>
+          <Row>
+            <Col
+                 xs={ 12 }
+                 md={ 12 }>
+            <ProgressStepper></ProgressStepper>
+            </Col>
+          </Row>
+          <Row>
+            <Col
+                 xs={ 12 }
+                 md={ 12 }>
+            <Calculator></Calculator>
+            <Libraries></Libraries>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     )
   }

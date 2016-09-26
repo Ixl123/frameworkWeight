@@ -4,7 +4,6 @@ import LibrariesGrid from './LibrariesGrid.js';
 import LibrariesSelectionChips from './LibrariesSelectionChips.js';
 import Divider from 'material-ui/Divider';
 const Libraries = React.createClass({
-
   render() {
     return (
       <div className="libraries">
