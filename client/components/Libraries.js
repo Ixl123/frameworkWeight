@@ -7,8 +7,12 @@ const Libraries = React.createClass({
   render() {
     return (
       <div className="libraries">
-        <LibrariesSelectionChips></LibrariesSelectionChips>
-        <Divider></Divider>
+        <span><h3>Your total budget:</h3> <h2>{ this.props.progress.budget }KB</h2></span>
+        <p>
+          Frontend libraries which fit in this budget
+        </p>
+        <LibrariesSelectionChips {...this.props}></LibrariesSelectionChips>
+        <Divider/>
         <LibrariesGrid></LibrariesGrid>
       </div>
     )

@@ -1,9 +1,6 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import DropDownMenu from 'material-ui/DropDownMenu';
+import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { connect } from 'react-redux';
-import * as actionCreators from '../actions/actionCreators.js';
 
 
 const styles = {
@@ -14,43 +11,31 @@ const styles = {
 
 class CalculatorDropDownConnectionType extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0
-    };
-  }
 
-  handleChange = (event, index, value) => this.setState({
-    value
-  });
-
+  handleChange = (event, index, value) => {
+    if (this.props.progress.selectedbandwidthType >= 0 && this.props.progress.loadingTime >= 0) {
+      this.props.calculateBudget(this.props.progress.bandwidthTypes[value].speed, this.props.progress.loadingTime, this.props.progress.bandwidthTypes[value].latency)
+    }
+    this.props.selectBandwidth(event, index, value)
+  };
   render() {
+    const progress = this.props.progress;
     return (
       <div>
-        <DropDownMenu
-                      value={ this.props.progress.selectedbandwidthType }
-                      onChange={ this.handleChange }>
-          { this.props.progress.bandwidthTypes.map((bandwidthType, i) => <MenuItem
-                                                                                   value={ i }
-                                                                                   primaryText={ bandwidthType } />) }
-        </DropDownMenu>
+        <SelectField
+                     value={ progress.selectedbandwidthType }
+                     onChange={ this.handleChange }
+                     floatingLabelText="Bandwidth type"
+                     errorText={ progress.selectedbandwidthType < 0 && 'Please select a bandwidth type' }>
+          { progress.bandwidthTypes.map((bandwidthType, i) => <MenuItem
+                                                                        key={ i }
+                                                                        value={ i }
+                                                                        primaryText={ bandwidthType.name } />) }
+        </SelectField>
         <br />
       </div>
       );
   }
 }
-function mapStateToProps(state) {
-  return {
-    libraries: state.libraries,
-    progress: state.progress
-
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-
-  return bindActionCreators(actionCreators, dispatch);
-}
-export default connect(mapStateToProps, mapDispatchToProps)(CalculatorDropDownConnectionType);
+export default CalculatorDropDownConnectionType;
 

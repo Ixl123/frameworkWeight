@@ -3,8 +3,10 @@ import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import FontIcon from 'material-ui/FontIcon';
 import SvgIconFace from 'material-ui/svg-icons/action/face';
-import { blue300, indigo900 } from 'material-ui/styles/colors';
+import Badge from 'material-ui/Badge';
 
+import { blue300, indigo900 } from 'material-ui/styles/colors';
+import Divider from 'material-ui/Divider';
 const styles = {
   chip: {
     margin: 4,
@@ -32,63 +34,36 @@ function handleTouchTap() {
 export default class LibrariesSelectionChips extends React.Component {
 
   render() {
+    const libraries = this.props.libraries;
+
     return (
-      <div style={ styles.wrapper }>
-        <Chip style={ styles.chip }>
-          Text Chip
-        </Chip>
-        <Chip
-              onRequestDelete={ handleRequestDelete }
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          Deletable Text Chip
-        </Chip>
-        <Chip
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          <Avatar src="images/uxceo-128.jpg" /> Image Avatar Chip
-        </Chip>
-        <Chip
-              onRequestDelete={ handleRequestDelete }
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          <Avatar src="images/ok-128.jpg" /> Deletable Avatar Chip
-        </Chip>
-        <Chip
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          <Avatar icon={ <FontIcon className="material-icons">
-                         </FontIcon> } /> FontIcon Avatar Chip
-        </Chip>
-        <Chip
-              onRequestDelete={ handleRequestDelete }
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          <Avatar
-                  color="#444"
-                  icon={ <SvgIconFace /> } /> SvgIcon Avatar Chip
-        </Chip>
-        <Chip
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          <Avatar size={ 32 }>
-            A
-          </Avatar>
-          Text Avatar Chip
-        </Chip>
-        <Chip
-              backgroundColor={ blue300 }
-              onRequestDelete={ handleRequestDelete }
-              onTouchTap={ handleTouchTap }
-              style={ styles.chip }>
-          <Avatar
-                  size={ 32 }
-                  color={ blue300 }
-                  backgroundColor={ indigo900 }>
-            MB
-          </Avatar>
-          Colored Chip
-        </Chip>
+      <div>
+        <h4>JavaScript Frameworks</h4>
+        <div style={ styles.wrapper }>
+          { libraries[0].map((javaScriptLibraries, i) => javaScriptLibraries.size_compressed <= this.props.progress.budget ?
+              <Badge
+                     badgeContent={ javaScriptLibraries.size_compressed + ' KB' }
+                     primary={ true }
+                     badgeStyle={ { width: 40, height: 40 } }>
+                <Chip key={ i }>
+                  <Avatar src={ javaScriptLibraries.img } />
+                  { javaScriptLibraries.name }
+                </Chip>
+              </Badge> : null) }
+        </div>
+        <Divider/>
+        <h4>CSS Frameworks</h4>
+        <div style={ styles.wrapper }>
+          { libraries[1].map((cssLibraries, i) => cssLibraries.size_compressed <= this.props.progress.budget ? <Badge
+                                                                                                                      badgeContent={ cssLibraries.size_compressed + ' KB' }
+                                                                                                                      primary={ true }
+                                                                                                                      badgeStyle={ { width: 40, height: 40 } }>
+                                                                                                                 <Chip key={ i }>
+                                                                                                                   <Avatar src={ cssLibraries.img } />
+                                                                                                                   { cssLibraries.name }
+                                                                                                                 </Chip>
+                                                                                                               </Badge> : null) }
+        </div>
       </div>
       );
   }

@@ -12,20 +12,14 @@ const Main = React.createClass({
         <AppBar
                 title="FrameworkWeight"
                 showMenuIconButton={ false } />
+        <ProgressStepper {...this.props}></ProgressStepper>
         <Grid>
           <Row>
             <Col
                  xs={ 12 }
                  md={ 12 }>
-            <ProgressStepper></ProgressStepper>
-            </Col>
-          </Row>
-          <Row>
-            <Col
-                 xs={ 12 }
-                 md={ 12 }>
-            <Calculator></Calculator>
-            <Libraries></Libraries>
+            <Calculator {...this.props}/>
+            { this.props.progress.seeResults ? <Libraries {...this.props}/> : null }
             </Col>
           </Row>
         </Grid>

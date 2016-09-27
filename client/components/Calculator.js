@@ -4,13 +4,17 @@ import CalculatorDropDownConnectionType from './CalculatorDropDownConnectionType
 import CalculatorSliderLoadingTime from './CalculatorSliderLoadingTime.js'
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
+
+
 const Calculator = React.createClass({
 
   render() {
     return (
       <div className="calculator">
-        <CalculatorDropDownConnectionType></CalculatorDropDownConnectionType>
-        <CalculatorSliderLoadingTime></CalculatorSliderLoadingTime>
+        <CalculatorDropDownConnectionType {...this.props}>
+        </CalculatorDropDownConnectionType>
+        <CalculatorSliderLoadingTime {...this.props}>
+        </CalculatorSliderLoadingTime>
         <Divider />
       </div>
     )

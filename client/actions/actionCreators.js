@@ -13,18 +13,28 @@ import * as types from './ActionTypes.js';
 
 // Select bandwidth
 
-export function selectBandwidth(bandwidthType) {
+export function selectBandwidth(event, index, selectedbandwidthType,) {
   return {
     type: types.SELECT_BANDWIDTH_TYP,
-    bandwidthType
+    selectedbandwidthType
   }
 }
 
 // Select bandwidth
 
-export function selectLoadSeconds(loadingTime) {
+export function selectLoadSeconds(event, loadingTime) {
   return {
     type: types.SELECT_LOAD_SECONDS,
     loadingTime
+  }
+}
+
+//calculates the loading time provide seconds and bandwidth_typ_speed and latency in ms
+
+export function calculateBudget(loadingTime, selectedbandwidthType, latency) {
+  let budget = Math.round(((loadingTime + (latency / 1000)) * selectedbandwidthType) / 8);
+  return {
+    type: types.CALCULATE_BUDGET,
+    budget
   }
 }
