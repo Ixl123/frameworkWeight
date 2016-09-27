@@ -13,7 +13,12 @@ const Libraries = React.createClass({
         </p>
         <LibrariesSelectionChips {...this.props}></LibrariesSelectionChips>
         <Divider/>
-        <LibrariesGrid></LibrariesGrid>
+        { /*
+                  Multi
+                  line
+                  comment
+                   <LibrariesGrid></LibrariesGrid>
+                */ }
       </div>
     )
   }

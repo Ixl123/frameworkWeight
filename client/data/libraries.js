@@ -4,13 +4,13 @@ const libraries = [
     {
       'name': 'AngularJS',
       'size_compressed': 50,
-      'img': 'https://raw.githubusercontent.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-small.png',
+      'img': 'https://lh6.googleusercontent.com/-TlY7amsfzPs/T9ZgLXXK1cI/AAAAAAABK-c/Ki-inmeYNKk/w749-h794/AngularJS-Shield-large.png',
       'selected': 'false'
     },
     {
       'name': 'AngularJS2',
       'size_compressed': 119,
-      'img': 'https://raw.githubusercontent.com/angular/angular.js/master/images/logo/AngularJS.exports/AngularJS-small.png',
+      'img': 'https://material.angularjs.org/latest/img/icons/angular-logo.svg',
       'selected': 'false'
     },
     {
