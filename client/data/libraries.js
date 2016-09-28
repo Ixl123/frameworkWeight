@@ -1,66 +1,121 @@
-const libraries = [
+const libraries = {
   // JavaScript frontend Frameworks
-  [
+  'JavaScriptLibraries': [
     {
       'name': 'AngularJS',
+      'libraryURL': 'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js',
+      'Version': '1.5.6',
       'size_compressed': 50,
       'img': 'https://lh6.googleusercontent.com/-TlY7amsfzPs/T9ZgLXXK1cI/AAAAAAABK-c/Ki-inmeYNKk/w749-h794/AngularJS-Shield-large.png',
-      'selected': 'false'
+      'selected': false,
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
     {
       'name': 'AngularJS2',
+      'libraryURL': 'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js',
+      'Version': '1.5.6',
       'size_compressed': 119,
       'img': 'https://material.angularjs.org/latest/img/icons/angular-logo.svg',
-      'selected': 'false'
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
     {
       'name': 'React',
+      'libraryURL': 'https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js',
+      'Version': '15.3.2',
       'size_compressed': 43,
       'img': 'https://upload.wikimedia.org/wikipedia/commons/5/57/React.js_logo.svg',
-      'selected': 'false'
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
     {
       'name': 'JQuery',
+      'libraryURL': 'https://code.jquery.com/jquery-3.1.1.min.js',
+      'Version': '3.1.1',
       'size_compressed': 225,
       'img': 'https://upload.wikimedia.org/wikipedia/en/9/9e/JQuery_logo.svg',
-      'selected': 'false'
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
     {
       'name': 'Polymer',
+      'libraryURL': 'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js',
+      'Version': '1.5.6',
       'size_compressed': 30,
       'img': 'https://elements.polymer-project.org/images/polymer.svg',
-      'selected': 'false'
-    },
-    {
-      'name': 'Meteor',
-      'size_compressed': 127,
-      'img': 'https://worldvectorlogo.com/logos/meteor-icon.svg',
-      'selected': 'false'
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
     {
       'name': 'BackboneJS',
+      'libraryURL': 'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js',
+      'Version': '1.3.3',
       'size_compressed': 138,
       'img': 'https://upload.wikimedia.org/wikipedia/commons/2/20/Backbone.js_logo.svg',
-      'selected': 'false'
-    }
-  ],
-  // CSS frontend Frameworks
-  [
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
+    },
     {
-      'name': 'Bootstrap',
+      'name': 'KnockoutJS',
+      'libraryURL': 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js',
+      'Version': '3.4.0',
+      'size_compressed': 138,
+      'img': 'https://worldvectorlogo.com/logos/knockout.svg',
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
+    },
+    {
+      'name': 'BootstrapJS',
+      'libraryURL': 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
+      'Version': '3.3.7',
       'size_compressed': 28,
       'img': 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Boostrap_logo.svg',
-      'selected': 'false'
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
     {
-      'name': 'Foundation',
+      'name': 'FoundationJS',
+      'libraryURL': 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.js',
+      'Version': '6.2.3',
       'size_compressed': 89,
       'img': 'https://foundation.joeworkman.net/depot/images/yeti-space.svg',
-      'selected': 'false'
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
     },
-  ]
-
-];
+  ],
+  // CSS frontend Frameworks
+  'CSSLibraries': [
+    {
+      'name': 'BootstrapCSS',
+      'libraryURL': 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+      'Version': '3.3.7',
+      'size_compressed': 28,
+      'img': 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Boostrap_logo.svg',
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
+    },
+    {
+      'name': 'FoundationCSS',
+      'libraryURL': 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css',
+      'Version': '6.2.3',
+      'size_compressed': 89,
+      'img': 'https://foundation.joeworkman.net/depot/images/yeti-space.svg',
+      'selected': 'false',
+      'isFetching': true,
+      'lastUpdated': 1439478405547,
+    },
+  ],
+};
 
 
 export default libraries;

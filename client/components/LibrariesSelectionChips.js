@@ -40,29 +40,32 @@ export default class LibrariesSelectionChips extends React.Component {
       <div>
         <h4>JavaScript Frameworks</h4>
         <div style={ styles.wrapper }>
-          { libraries[0].map((javaScriptLibraries, i) => javaScriptLibraries.size_compressed <= this.props.progress.budget ?
+          { libraries.JavaScriptLibraries.map((javaScriptLibrary, i) => javaScriptLibrary.size_compressed <= this.props.progress.budget ?
               <Badge
-                     badgeContent={ javaScriptLibraries.size_compressed + ' KB' }
+                     key={ javaScriptLibrary.name }
+                     badgeContent={ javaScriptLibrary.size_compressed + ' KB' }
                      primary={ true }
                      badgeStyle={ { width: 40, height: 40 } }>
-                <Chip key={ i }>
-                  <Avatar src={ javaScriptLibraries.img } />
-                  { javaScriptLibraries.name }
+                <Chip>
+                  <Avatar src={ javaScriptLibrary.img } />
+                  { javaScriptLibrary.name }
                 </Chip>
               </Badge> : null) }
         </div>
         <Divider/>
         <h4>CSS Frameworks</h4>
         <div style={ styles.wrapper }>
-          { libraries[1].map((cssLibraries, i) => cssLibraries.size_compressed <= this.props.progress.budget ? <Badge
-                                                                                                                      badgeContent={ cssLibraries.size_compressed + ' KB' }
-                                                                                                                      primary={ true }
-                                                                                                                      badgeStyle={ { width: 40, height: 40 } }>
-                                                                                                                 <Chip key={ i }>
-                                                                                                                   <Avatar src={ cssLibraries.img } />
-                                                                                                                   { cssLibraries.name }
-                                                                                                                 </Chip>
-                                                                                                               </Badge> : null) }
+          { libraries.CSSLibraries.map((CSSLibrary, i) => CSSLibrary.size_compressed <= this.props.progress.budget ?
+              <Badge
+                     key={ CSSLibrary.name }
+                     badgeContent={ CSSLibrary.size_compressed + ' KB' }
+                     primary={ true }
+                     badgeStyle={ { width: 40, height: 40 } }>
+                <Chip>
+                  <Avatar src={ CSSLibrary.img } />
+                  { CSSLibrary.name }
+                </Chip>
+              </Badge> : null) }
         </div>
       </div>
       );

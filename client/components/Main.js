@@ -6,6 +6,24 @@ import AppBar from 'material-ui/AppBar';
 import ProgressStepper from './ProgressStepper.js'
 const {Grid, Row, Col} = require('react-flexbox-grid');
 const Main = React.createClass({
+  // load library size on creation
+  componentDidMount() {
+    console.log('MOUNTED LOAD DATA');
+    this.props.libraries.JavaScriptLibraries.map((javaScriptLibrary, i) => {
+      console.log(javaScriptLibrary);
+
+      this.props.fetchLibrary(javaScriptLibrary.libraryURL, i, 'JS')
+
+
+    });
+    this.props.libraries.CSSLibraries.map((CSSLibrary, i) => {
+      console.log(CSSLibrary);
+
+      this.props.fetchLibrary(CSSLibrary.libraryURL, i, 'CSS')
+
+
+    });
+  },
   render() {
     return (
       <div>

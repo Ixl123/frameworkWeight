@@ -1,6 +1,6 @@
 const progress = {
   'stepp': 0,
-  'loadingTime': 0,
+  'loadingTime': 2,
   'sliderStepSize': 0.1,
   'sliderMaxValue': 10,
   'sliderMinValue': 0.1,
