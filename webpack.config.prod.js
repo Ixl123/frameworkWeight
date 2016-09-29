@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/frameworkWeight/'
+    publicPath: 'frameworkWeight/dist/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
