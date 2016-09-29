@@ -23,11 +23,17 @@ const defaultState = {
   progress
 };
 
-const enhancers = compose(
-  applyMiddleware(thunkMiddleware, loggerMiddleware),
-  window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument()
+let middleware = [thunkMiddleware];
 
-)
+if (process.env.NODE_ENV !== 'production') {
+  middleware = [...middleware, loggerMiddleware];
+} else {
+  middleware = [...middleware];
+}
+const enhancers = compose(
+  applyMiddleware(...middleware),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+);
 
 const store = createStore(rootReducer, defaultState, enhancers);
 
