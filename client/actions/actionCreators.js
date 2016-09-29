@@ -54,11 +54,35 @@ export function requestLibrary(libraryURL) {
     libraryURL
   }
 }
+/**
+ * ASYNC ACTIONS
+ * @param  {[type]} libraryURL [description]
+ * @return {[type]}           [description]
+ */
+
+export function requestcdnAPI(apiRequestName) {
+  return {
+    type: types.REQUEST_CDNJS_API,
+    apiRequestName
+  }
+}
+
+export function receivecdnAPI(json, index, frameworkType) {
+  return {
+    frameworkType: frameworkType,
+    type: types.RECEIVE_CDNJS_API,
+    index,
+    version: json.version,
+    description: json.description,
+    lastUpdated: Date.now(),
+    isFetching: false
+  }
+}
 
 export function receiveLibrary(libraryURL, librarySize, index, frameworkType) {
 
   return {
-    frameworkType,
+    frameworkType: frameworkType,
     type: types.RECEIVE_LIBRARY,
     size_compressed: librarySize,
     index,
@@ -102,6 +126,7 @@ export function fetchLibrary(libraryURL, i, frameworkType) {
   // catch any error in the network call.
   }
 }
+
 function gZip(arrayBuffer) {
   let options = {
     level: 6,
@@ -118,4 +143,40 @@ function gZip(arrayBuffer) {
  */
 function calculateKBSize(byteLength) {
   return Math.round(byteLength / 1000);
+}
+
+
+export function fetchcdnjAPI(libraryName, i, frameworkType) {
+
+  // Thunk middleware knows how to handle functions.
+  // It passes the dispatch method as an argument to the function,
+  // thus making it able to dispatch actions itself.
+  return function(dispatch) {
+
+    // First dispatch: the app state is updated to inform
+    // that the API call is starting.
+
+    dispatch(requestcdnAPI(libraryName))
+
+    // The function called by the thunk middleware can return a value,
+    // that is passed on as the return value of the dispatch method.
+
+    // In this case, we return a promise to wait for.
+    // This is not required by thunk middleware, but it is convenient for us.
+    return fetch('https://api.cdnjs.com/libraries?search=' + libraryName + '&fields=version,description,assets')
+      .then(response => response.json())
+      .then(json =>
+      // We can dispatch many times!
+      // Here, we update the app state with the results of the API call.
+      // json[0] most valuable search hit and latest is the url
+      dispatch(fetchLibrary(json.results[0].latest, i, frameworkType)).then(() => dispatch(receivecdnAPI(json.results[0], i, frameworkType)))
+
+
+      // frameworkType === 'CSS' ? dispatch(fetchLibrary(json[0].assets[].in)) : true,
+
+    )
+
+  // In a real world app, you also want to
+  // catch any error in the network call.
+  }
 }

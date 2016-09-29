@@ -47,8 +47,11 @@ export default class LibrariesSelectionChips extends React.Component {
                      primary={ true }
                      badgeStyle={ { width: 40, height: 40 } }>
                 <Chip>
-                  <Avatar src={ javaScriptLibrary.img } />
+                  <Avatar
+                          size={ 16 }
+                          src={ javaScriptLibrary.img } />
                   { javaScriptLibrary.name }
+                  { ' (' + javaScriptLibrary.version + ')' }
                 </Chip>
               </Badge> : null) }
         </div>
@@ -62,8 +65,12 @@ export default class LibrariesSelectionChips extends React.Component {
                      primary={ true }
                      badgeStyle={ { width: 40, height: 40 } }>
                 <Chip>
-                  <Avatar src={ CSSLibrary.img } />
+                  <Avatar
+                          size={ 16 }
+                          src={ CSSLibrary.img } />
                   { CSSLibrary.name }
+                  { }
+                  { ' (' + CSSLibrary.version + ')' }
                 </Chip>
               </Badge> : null) }
         </div>
