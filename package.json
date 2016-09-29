@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": ":) ",
   "scripts": {
-    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
+    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
     "build": "npm run clean && npm run build:webpack",
     "test": "NODE_ENV=production mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "clean": "rimraf dist",
@@ -51,7 +51,7 @@
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^2.0.0",
+    "stylus-loader": "^2.1.0",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
@@ -63,6 +63,7 @@
     "expect": "^1.18.0",
     "expect-jsx": "^2.5.1",
     "flexboxgrid": "^6.3.1",
+    "gh-pages": "^0.11.0",
     "gzip-js": "^0.3.2",
     "material-ui": "^0.15.4",
     "mocha": "^2.4.5",

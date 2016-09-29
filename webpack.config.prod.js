@@ -25,6 +25,12 @@ module.exports = {
       }
     })
   ],
+  /**
+   * test:  A regular expression that matches the file extensions that should run through this loader (Required).
+    loader:  The name of the loader (Required).
+    include / exclude:   Optional setting to manually set which folders and files the loader should explicitly add or ignore.
+    query:  The query setting can be used to pass Additional options to the loader.
+   */
   module: {
     loaders: [
       // js
