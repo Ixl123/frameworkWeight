@@ -145,4 +145,4 @@ const libraries = {
 };
 
 
-export default libraries;
+module.exports = libraries;

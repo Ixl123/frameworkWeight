@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "name": "1140",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/1140/2.0/1140.min.css"
+    },
+    {
+      "name": "1000hz-bootstrap-validator",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"
+    },
+    {
+      "name": "zoom.js",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/zoom.js/0.0.1/zoom.min.js"
+    },
+    {
+      "name": "zoomooz",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/zoomooz/1.1.6/jquery.zoomooz.min.js"
+    },
+    {
+      "name": "zui",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/zui/1.5.0/js/zui.min.js"
+    },
+    {
+      "name": "zurb-ink",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/zurb-ink/1.0.5/ink.min.css"
+    },
+    {
+      "name": "zxcvbn",
+      "latest": "https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.0/zxcvbn.js"
+    }
+  ],
+  "total": 2524
+}
