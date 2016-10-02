@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 console.log('Hello, world!');
 require('es6-promise').polyfill();
-require('isomorphic-fetch');
+let fetch = require('node-fetch');
+var Promise = require('es6-promise').Promise;
+const zlib = require('zlib');
+
 let fs = require('fs');
 let libraries = require('./client/data/libraries.js');
 let cdnjsLibraries = require('./client/data/cdnjsLibraries.json');
-let pathTocdnjsLibraries = './client/data/cdnjsLibraries.json';
+let pathTocdnjsLibrariesFile = './client/data/cdnjsLibraries.json';
+let editedcdnjsLibrariesFile = require('./client/data/editedcdnjsLibraries.json');
 let libraries2;
 // import data
 // require('./client/data/libraries');
@@ -20,18 +24,87 @@ class Data {
    */
   getcdnjsAPIData() {
     // store all data fetched from cdnjs 
-    this.getLastModifiedDataDate(pathTocdnjsLibraries, (myDate) => {
+    this.getLastModifiedDataDate(pathTocdnjsLibrariesFile, (myDate) => {
       if (this.checkDataDate(myDate)) {
-        let apiURL = 'https://api.cdnjs.com/libraries';
+        let apiURL = 'https://api.cdnjs.com/libraries?fields=version,description,homepage';
         let path = './client/data/cdnjsLibraries.json';
         return fetch(apiURL)
           .then(response => response.json())
           //write file stringify parameter to pretty write
           .then(json => this.writeFile(path, JSON.stringify(json, null, 2)))
-      } else {
-        this.fetchEachLibraryFrom(cdnjsLibraries);
       }
     })
+    let editedcdnjsLibrariesPath = './client/data/editedcdnjsLibraries.json';
+    let editedcdnjsLibraries = cdnjsLibraries.results.map(result => {
+      // -1 for not found >= 0 for included
+      let isLibraryIsIncludedIndex = editedcdnjsLibrariesFile.map(function(library) {
+        return library.name
+      }).indexOf(result.name);
+
+      if (isLibraryIsIncludedIndex === -1 || (result.latest && this.checkLibraryAndVersion(editedcdnjsLibrariesFile, result.name, result.version))) {
+        return fetch(result.latest)
+          .then(response => response.text())
+          //write file stringify parameter to pretty write
+          .then(text => {
+
+            let size = this.calculateKBSize(this.gZip(text));
+            let editedResult = {};
+            editedResult.size = size;
+            editedResult.name = result.name;
+
+            editedResult.latest = result.latest;
+
+            editedResult.version = result.version;;
+            editedResult.description = result.description;
+            editedResult.homepage = result.homepage;
+            editedResult.favicon = result.homepage !== undefined ? 'https://s2.googleusercontent.com/s2/favicons?domain=' + result.homepage : '';
+            // find position to update
+            if (isLibraryIsIncludedIndex === -1) {
+              editedcdnjsLibrariesFile.push(editedResult);
+            } else {
+              editedcdnjsLibrariesFile[isLibraryIsIncludedIndex] = editedResult;
+            }
+            return editedResult;
+
+          }).catch(function error(error) {
+          console.log('request failed', error); // error could either be a network or a runtime error
+        });
+      } else {
+
+        console.log('no need for update');
+
+        // soo actually dooo nothing no overwrite or something
+        return editedcdnjsLibrariesFile[isLibraryIsIncludedIndex]
+      }
+    })
+
+    Promise.all(editedcdnjsLibraries).then(json => {
+      console.log(json);
+      this.writeFile(editedcdnjsLibrariesPath, JSON.stringify(editedcdnjsLibrariesFile, null, 2))
+      console.log('wrote new file')
+    }, function(err) {
+      console.log(err);
+      callback(err);
+    });
+
+  }
+  /**
+   * checks 
+   * @param  {[type]} editedcdnjsLibrariesFile [description]
+   * @param  {[type]} resultName               [description]
+   * @param  {[type]} resultVersion            [description]
+   * @return {[type]}                          [description]
+   */
+  checkLibraryAndVersion(editedcdnjsLibrariesFile, resultName, resultVersion) {
+    for (let librariesObject of editedcdnjsLibrariesFile) {
+
+      if (librariesObject != undefined || librariesObject != null) {
+        if (librariesObject.name === resultName && librariesObject.version === resultVersion) {
+          return false
+        }
+      }
+    }
+    return true
   }
   /**
    * writes a file into directory
@@ -40,7 +113,6 @@ class Data {
    * @return {[string]}   logs out succes or error message
    */
   writeFile(filename, contents) {
-    console.log(filename, contents);
     fs.writeFile(filename, contents, (err) => {
       if (err) {
         console.log(err);
@@ -50,66 +122,13 @@ class Data {
     });
   }
   /**
-   * fetch each library from cdnjs and store the data in libraries folder creates
-   */
-  fetchEachLibraryFrom(cdnjsLibraries) {
-    // console.log(cdnjsLibraries)
-    console.log('fetchEachLibraryFrom');
-    let fetchedCDNJSLibraries = cdnjsLibraries;
-
-    fetchedCDNJSLibraries.results.map((librarieInfo, index) => {
-      this.fetchcdnjSpecificLibrary(librarieInfo, index, (callBackObjectToSave) => {
-
-        console.log(callBackObjectToSave);
-
-
-      });
-    });
-
-  }
-  /**
-   * [fetchcdnjSpecificLibrary description]
-   * @param  {[type]} libraryName [description]
-   * @param  {[type]} i           [description]
+   * gzip
+   * @param  {[type]} arrayBuffer [description]
    * @return {[type]}             [description]
    */
-  fetchcdnjSpecificLibrary(libraryName, i) {
-
-    return fetch('https://api.cdnjs.com/libraries?search=' + libraryName + '&fields=version,description,homepage,assets')
-      .then(response => response.json())
-      .then(json => this.receivecdnAPI(json.results[0], i))
-      .then((callbackReceivedObject) => this.fetchLibrarySize(callbackReceivedObject))
-  // frameworkType === 'CSS' ? dispatch(fetchLibrary(json[0].assets[].in)) : true,
-  }
-  receivecdnAPI(json, index, callbackReceivedObject) {
-    console.log('receivedcdnAPI');
-
-    return callbackReceivedObject([{
-      index: index,
-      name: json.name,
-      url: json.latest,
-      version: json.version,
-      description: json.description,
-      homepage: json.homepage,
-      favicon: 'https://s2.googleusercontent.com/s2/favicons?domain=' + json.homepage !== undefined ? json.homepage : 'undefined'
-    }]);
-  }
-  /**
-   * gets the library size for an url
-   * @param  {[type]} libraryURL [description]
-   * @return {[type]}            [description]
-   */
-  fetchLibrarySize(object) {
-    console.log('fetchLibrarySize:' + object);
-    // return fetch(libraryURL)
-    //   .then(response => response.text())
-    //   .then(plainText =>
-    //   // We can dispatch many times!
-    //   // Here, we update the app state with the results of the API call.
-
-    //   	this.receiveLibrary(libraryURL, calculateKBSize(gZip(plainText)), i, frameworkType))
-    // )
-
+  gZip(arrayBuffer) {
+    let out = zlib.gzipSync(arrayBuffer)
+    return out.length;
   }
   /**
  * convert byteLength to bit
@@ -117,7 +136,7 @@ class Data {
  * @return {[type]}            [description]
  */
   calculateKBSize(byteLength) {
-    return Math.round(byteLength / 1000);
+    return Math.round((byteLength / 1000) * 10) / 10;
   }
 
   /**
@@ -125,7 +144,6 @@ class Data {
    * 
    */
   checkDataDate(dataDate) {
-    console.log('checkDataDate:' + 'HIIIIIIIIIIIIIIEIRERIEJARIJAIRJ')
     //Get 1 day in milliseconds
     let oneDay = 1000 * 60 * 60 * 24;
     //get current date convert both dates in milliseconds
@@ -133,8 +151,7 @@ class Data {
     let dataDateTime = dataDate.getTime();
     let difference = currentDate - dataDate;
     let daysDifference = Math.round(difference / oneDay);
-    console.log('daysDiffernce: ' + daysDifference);
-    return daysDifference > 1 ? true : false;
+    return daysDifference >= 3 ? true : false;
   }
   /**
    * returns last modified date of a file
@@ -142,10 +159,8 @@ class Data {
    * @return {[callbackFunction with date object]} returns the last modified date as a callback of the file
    */
   getLastModifiedDataDate(path, callbackDate) {
-    console.log('getLastModifiedDataDate' + path)
     fs.stat(path, (error, stats) => {
       let lastModifiedDate = new Date(stats.mtime);
-      console.log(lastModifiedDate);
       return callbackDate(lastModifiedDate);
     });
   }

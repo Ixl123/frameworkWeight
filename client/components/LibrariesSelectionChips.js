@@ -4,7 +4,7 @@ import Chip from 'material-ui/Chip';
 import FontIcon from 'material-ui/FontIcon';
 import SvgIconFace from 'material-ui/svg-icons/action/face';
 import Badge from 'material-ui/Badge';
-
+import AutoCompleteExampleSimple from './LibrariesAutoComplete'
 import { blue300, indigo900 } from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 const styles = {
@@ -38,42 +38,26 @@ export default class LibrariesSelectionChips extends React.Component {
 
     return (
       <div>
-        <h4>JavaScript Frameworks</h4>
+        <h4>Frameworks</h4>
+        <AutoCompleteExampleSimple/>
         <div style={ styles.wrapper }>
-          { libraries.JavaScriptLibraries.map((javaScriptLibrary, i) => javaScriptLibrary.size_compressed <= this.props.progress.budget ?
+          { libraries.map((javaScriptLibrary, i) => (javaScriptLibrary.size <= this.props.progress.budget && i <= 50) ?
+            
               <Badge
                      key={ javaScriptLibrary.name }
-                     badgeContent={ javaScriptLibrary.size_compressed + ' KB' }
+                     badgeContent={ javaScriptLibrary.size + ' KB' }
                      primary={ true }
-                     badgeStyle={ { width: 40, height: 40 } }>
-                <Chip>
+                     badgeStyle={ { width: 45, height: 45 } }>
+                <Chip style={ styles.chip }>
                   <Avatar
                           size={ 16 }
-                          src={ javaScriptLibrary.img } />
+                          src={ javaScriptLibrary.favicon } />
                   { javaScriptLibrary.name }
                   { ' (' + javaScriptLibrary.version + ')' }
                 </Chip>
               </Badge> : null) }
         </div>
         <Divider/>
-        <h4>CSS Frameworks</h4>
-        <div style={ styles.wrapper }>
-          { libraries.CSSLibraries.map((CSSLibrary, i) => CSSLibrary.size_compressed <= this.props.progress.budget ?
-              <Badge
-                     key={ CSSLibrary.name }
-                     badgeContent={ CSSLibrary.size_compressed + ' KB' }
-                     primary={ true }
-                     badgeStyle={ { width: 40, height: 40 } }>
-                <Chip>
-                  <Avatar
-                          size={ 16 }
-                          src={ CSSLibrary.img } />
-                  { CSSLibrary.name }
-                  { }
-                  { ' (' + CSSLibrary.version + ')' }
-                </Chip>
-              </Badge> : null) }
-        </div>
       </div>
       );
   }

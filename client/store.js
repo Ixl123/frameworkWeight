@@ -6,9 +6,11 @@ import { fetchLibrary } from './actions/actionCreators';
 import rootReducer from './reducers/rootReducer';
 
 // import data
-import libraries from './data/libraries';
+let libraries = require('json!./data/editedcdnjsLibraries.json');
 import progress from './data/progress';
 
+console.log(libraries);
+console.log(progress);
 // import thunkMiddleware for async actions
 
 import thunkMiddleware from 'redux-thunk'

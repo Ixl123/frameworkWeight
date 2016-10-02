@@ -14,19 +14,23 @@ class ProgressStepper extends React.Component {
 
     return (
       <div style={ { width: '100%', maxWidth: 900, margin: 'auto' } }>
-        <Stepper activeStep={ this.props.progress.stepp }>
-          <Step>
-            <StepLabel>
+        <Stepper
+                 activeStep={ this.props.progress.stepp }
+                 style={ { boxSizing: 'content-box' } }>
+          <Step style={ { boxSizing: 'content-box' } }>
+            <StepLabel style={ { boxSizing: 'content-box' } }>
               Select Bandtwith type
             </StepLabel>
           </Step>
-          <Step>
-            <StepLabel>
+          <Step style={ { boxSizing: 'content-box' } }>
+            <StepLabel style={ { boxSizing: 'content-box' } }>
               Select loading time
             </StepLabel>
           </Step>
-          <Step>
-            <StepLabel>
+          <Step style={ { boxSizing: 'content-box' } }>
+            <StepLabel
+                       className="boxSizing"
+                       style={ { boxSizing: 'content-box' } }>
               See Results
             </StepLabel>
           </Step>
