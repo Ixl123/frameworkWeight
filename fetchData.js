@@ -60,8 +60,10 @@ class Data {
             editedResult.favicon = result.homepage !== undefined ? 'https://s2.googleusercontent.com/s2/favicons?domain=' + result.homepage : '';
             // find position to update
             if (isLibraryIsIncludedIndex === -1) {
+              console.log('pushed library with name ' + editedResult.name)
               editedcdnjsLibrariesFile.push(editedResult);
             } else {
+              console.log('updated library with name ' + editedResult.name)
               editedcdnjsLibrariesFile[isLibraryIsIncludedIndex] = editedResult;
             }
             return editedResult;
@@ -79,7 +81,7 @@ class Data {
     })
 
     Promise.all(editedcdnjsLibraries).then(json => {
-      console.log(json);
+
       this.writeFile(editedcdnjsLibrariesPath, JSON.stringify(editedcdnjsLibrariesFile, null, 2))
       console.log('wrote new file')
     }, function(err) {

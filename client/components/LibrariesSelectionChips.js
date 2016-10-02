@@ -39,7 +39,7 @@ export default class LibrariesSelectionChips extends React.Component {
     return (
       <div>
         <h4>Frameworks</h4>
-        <AutoCompleteExampleSimple/>
+        <AutoCompleteExampleSimple {...this.props} />
         <div style={ styles.wrapper }>
           { libraries.map((javaScriptLibrary, i) => (javaScriptLibrary.size <= this.props.progress.budget && i <= 50) ?
             
