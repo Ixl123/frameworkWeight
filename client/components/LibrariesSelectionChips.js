@@ -14,6 +14,8 @@ const styles = {
   wrapper: {
     display: 'flex',
     flexWrap: 'wrap',
+    height: 300,
+    overflow: 'auto'
   },
 };
 /**
@@ -29,7 +31,7 @@ export default class LibrariesSelectionChips extends React.Component {
     console.log(filteredLibraries);
     let displaySearchedLibraries = <div>
                                      { filteredLibraries.searchedLibraries !== undefined
-                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 50)
+                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 100)
                                          ? <Badge
                                                   key={ searchedLibrary.name }
                                                   badgeContent={ searchedLibrary.size + ' KB' }
