@@ -1,6 +1,7 @@
 import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
-
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 export default class AutoCompleteExampleSimple extends React.Component {
 
   constructor(props) {
@@ -53,8 +54,14 @@ export default class AutoCompleteExampleSimple extends React.Component {
                                    }) }
                       maxSearchResults={ 8 }
                       onUpdateInput={ this.handleUpdateInput }
-                      onNewRequest={ this.handleNewRequest } />
+                      onNewRequest={ this.handleNewRequest }
+                      style={ { marginBottom: 30 } } />
+        <Subheader>
+          Libraries
+        </Subheader>
+        <Divider/>
       </div>
+
       );
   }
 }

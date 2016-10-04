@@ -9,7 +9,7 @@ const Libraries = React.createClass({
       <div className="libraries">
         <span><h3>Your total budget:</h3> <h2>{ this.props.progress.budget }KB</h2></span>
         <p>
-          Frontend libraries which fit in this budget
+          Frontend libraries which fit in this budget (only the first 50 are displayed at the same time feel free to search for a specific framework.)
         </p>
         <LibrariesSelectionChips {...this.props}></LibrariesSelectionChips>
         <Divider/>

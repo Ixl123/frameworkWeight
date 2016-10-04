@@ -54,16 +54,18 @@ class CalculatorSliderLoadingTime extends React.Component {
                     disabled={ progress.sliderDisabled }
                     required={ true }
                     onChange={ this.handleChange.bind(this) } />
-            <p>
-              <span>{ 'The selected loading time is: ' }</span>
-              <h3>{ progress.loadingTime }</h3>
-              <span>{ ' from a range of 0.1 to 10 inclusive' }</span>
-            </p>
             </Col>
             <Col
                  xs={ 1 }
                  md={ 1 }>
             <span><p> { progress.sliderMaxValue } seconds </p></span>
+            </Col>
+            <Col
+                 xs={ 12 }
+                 md={ 12 }>
+            <span><p> { 'The selected loading time is: ' } </p></span>
+            <h3>{ progress.loadingTime }SEC</h3>
+            <span><p> { ' from a range of 0.1 to 10 inclusive' } </p></span>
             </Col>
           </Row>
         </Grid>
