@@ -13,30 +13,29 @@ export default class AutoCompleteExampleSimple extends React.Component {
    * @param  {[type]} value [description]
    * @return {[type]}       [description]
    */
-  handleUpdateInput = (searchText, array) => {
-    // console.log(value);
-    // console.log(array.length);
-
-    if (array !== undefined && array.length > 0) {
-
-      let testArray = array.filter(value => value !== undefined && value.search(searchText) >= 0);
-      //create redux handler
-      // this.props.libraries = value;
-      console.log(testArray.length);
-
+  handleUpdateInput = (searchText) => {
+    if (this.props.libraries !== undefined && this.props.libraries.length > 0) {
+      let searchedLibraryArray = this.props.libraries.filter(value => value !== undefined && value.name.search(searchText) >= 0);
+      this.props.handleSearchInput(searchedLibraryArray);
     }
-    ;
-
   }
   /**
-   * show detail view
+   * gets triggered on autocomplete seleciton or pressing enter
    * @param  {[type]} value [description]
    * @return {[type]}       [description]
    */
-  handleNewRequest = (value) => {
+  handleNewRequest = (value, index) => {
+    debugger;
     console.log(value);
-    //create redux handler
-    // this.props.libraries = value;
+
+    //check wheter realy a autocomplete index got selected also gets triggered when pressing enter then dont do anyhting
+    if (index !== -1) {
+      let searchedLibrary = [];
+      searchedLibrary.push(this.props.libraries[index]);
+      this.props.handleSearchRequest(searchedLibrary);
+
+    }
+
 
   };
 

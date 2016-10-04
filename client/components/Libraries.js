@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import LibrariesGrid from './LibrariesGrid.js';
+
 import LibrariesSelectionChips from './LibrariesSelectionChips.js';
 import Divider from 'material-ui/Divider';
 const Libraries = React.createClass({
@@ -13,12 +13,6 @@ const Libraries = React.createClass({
         </p>
         <LibrariesSelectionChips {...this.props}></LibrariesSelectionChips>
         <Divider/>
-        { /*
-                  Multi
-                  line
-                  comment
-                   <LibrariesGrid></LibrariesGrid>
-                */ }
       </div>
     )
   }

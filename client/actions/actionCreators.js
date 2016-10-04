@@ -44,24 +44,20 @@ export function calculateBudget(loadingTime, selectedbandwidthType, latency) {
 
 // handle search input which gets triggers on every keystroke.
 
-export function handleSearchInput(input, libraries) {
-  /**
-   * map new library array
-   */
-  let searchedArray = input;
+export function handleSearchInput(searchedArray) {
+
   return {
     type: types.HANDLE_SEARCH_INPUT,
-    budget
+    searchedArray
   }
 }
 
 // handle search request which gets only triggered if autocomplete field gets selected
 
-export function handleSearchRequest(input) {
-  let budget = Math.round(((loadingTime + (latency / 1000)) * selectedbandwidthType) / 8);
+export function handleSearchRequest(searchedArray) {
   return {
-    type: types.CALCULATE_BUDGET,
-    budget
+    type: types.HANDLE_SEARCH_REQUEST,
+    searchedArray
   }
 
 

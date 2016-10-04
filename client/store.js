@@ -4,13 +4,11 @@ import { fetchLibrary } from './actions/actionCreators';
 // import the root reducer
 
 import rootReducer from './reducers/rootReducer';
-
 // import data
 let libraries = require('json!./data/editedcdnjsLibraries.json');
 import progress from './data/progress';
+import filteredLibraries from './data/filteredLibraries';
 
-console.log(libraries);
-console.log(progress);
 // import thunkMiddleware for async actions
 
 import thunkMiddleware from 'redux-thunk'
@@ -22,11 +20,12 @@ const loggerMiddleware = createLogger()
 // create an object for the default data
 const defaultState = {
   libraries,
-  progress
+  progress,
+  filteredLibraries
 };
 
 let middleware = [thunkMiddleware];
-
+// check for  build or dev version. include loggermiddlerware only in dev 
 if (process.env.NODE_ENV !== 'production') {
   middleware = [...middleware, loggerMiddleware];
 } else {

@@ -4,10 +4,12 @@ import { combineReducers } from 'redux';
 
 import progress from './progress';
 import libraries from './libraries';
+import filteredLibraries from './filteredLibraries';
 
 const rootReducer = combineReducers({
   progress,
-  libraries
+  libraries,
+  filteredLibraries
 });
 
 export default rootReducer;

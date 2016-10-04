@@ -2,6 +2,9 @@ import React from 'react';
 import Slider from 'material-ui/Slider';
 import SvgIcon from 'material-ui/SvgIcon';
 import ActionAlarm from 'material-ui/svg-icons/action/alarm';
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 const {Grid, Row, Col} = require('react-flexbox-grid');
 
 const iconStyles = {
@@ -10,6 +13,11 @@ const iconStyles = {
 };
 
 class CalculatorSliderLoadingTime extends React.Component {
+  /**
+   * handle slider change and dispatch action to redux
+   * @param  {Object} event      the actual event
+   * @param  {Number} loadingTime selected loadingt time in seconds range 0.1-10s
+   */
   handleChange = (event, loadingTime) => {
 
     this.props.selectLoadSeconds(event, loadingTime);
@@ -47,7 +55,8 @@ class CalculatorSliderLoadingTime extends React.Component {
                     required={ true }
                     onChange={ this.handleChange.bind(this) } />
             <p>
-              <span>{ 'The value of this slider is:' } { progress.loadingTime }</span>
+              <span>{ 'The selected loading time is: ' }</span>
+              <h3>{ progress.loadingTime }</h3>
               <span>{ ' from a range of 0.1 to 10 inclusive' }</span>
             </p>
             </Col>

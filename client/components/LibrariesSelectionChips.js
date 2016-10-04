@@ -16,46 +16,72 @@ const styles = {
     flexWrap: 'wrap',
   },
 };
-
-function handleRequestDelete() {
-  alert('You clicked the delete button.');
-}
-
-function handleTouchTap() {
-  alert('You clicked the Chip.');
-}
-
 /**
- * Examples of Chips, using an image [Avatar](/#/components/font-icon), [Font Icon](/#/components/font-icon) Avatar,
- * [SVG Icon](/#/components/svg-icon) Avatar, "Letter" (string) Avatar, and with custom colors.
- *
- * Chips with the `onRequestDelete` property defined will display a delete icon.
+ * libraries chips component. 
  */
+
 export default class LibrariesSelectionChips extends React.Component {
 
   render() {
-    const libraries = this.props.libraries;
+    let libraries = this.props.libraries;
+
+    let filteredLibraries = this.props.filteredLibraries;
+    console.log(filteredLibraries);
+    let displaySearchedLibraries = <div>
+                                     { filteredLibraries.searchedLibraries !== undefined
+                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 50)
+                                         ? <Badge
+                                                  key={ searchedLibrary.name }
+                                                  badgeContent={ searchedLibrary.size + ' KB' }
+                                                  primary={ true }
+                                                  badgeStyle={ searchedLibrary.size >= 10 ? {
+                                                                 width: 50,
+                                                                 height: 50
+                                                               } : {
+                                                                 width: 40,
+                                                                 height: 40
+                                                               } }>
+                                             <Chip style={ styles.chip }>
+                                               <Avatar
+                                                       size={ 16 }
+                                                       src={ searchedLibrary.favicon } />
+                                               { searchedLibrary.name }
+                                               { ' (' + searchedLibrary.version + ')' }
+                                             </Chip>
+                                           </Badge>
+                                         : null)
+                                       : null }
+                                   </div>;
+    let displaySizeIncludedLibraries = <div>
+                                         { libraries.map((javaScriptLibrary, i) => (javaScriptLibrary.size <= this.props.progress.budget && i <= 50) ?
+                                           
+                                             <Badge
+                                                    key={ javaScriptLibrary.name }
+                                                    badgeContent={ javaScriptLibrary.size + ' KB' }
+                                                    primary={ true }
+                                                    badgeStyle={ javaScriptLibrary.size >= 10 ? {
+                                                                   width: 50,
+                                                                   height: 50
+                                                                 } : {
+                                                                   width: 40,
+                                                                   height: 40
+                                                                 } }>
+                                               <Chip style={ styles.chip }>
+                                                 <Avatar
+                                                         size={ 16 }
+                                                         src={ javaScriptLibrary.favicon } />
+                                                 { javaScriptLibrary.name }
+                                                 { ' (' + javaScriptLibrary.version + ')' }
+                                               </Chip>
+                                             </Badge> : null) }
+                                       </div>;
 
     return (
       <div>
         <h4>Frameworks</h4>
         <AutoCompleteExampleSimple {...this.props} />
         <div style={ styles.wrapper }>
-          { libraries.map((javaScriptLibrary, i) => (javaScriptLibrary.size <= this.props.progress.budget && i <= 50) ?
-            
-              <Badge
-                     key={ javaScriptLibrary.name }
-                     badgeContent={ javaScriptLibrary.size + ' KB' }
-                     primary={ true }
-                     badgeStyle={ { width: 45, height: 45 } }>
-                <Chip style={ styles.chip }>
-                  <Avatar
-                          size={ 16 }
-                          src={ javaScriptLibrary.favicon } />
-                  { javaScriptLibrary.name }
-                  { ' (' + javaScriptLibrary.version + ')' }
-                </Chip>
-              </Badge> : null) }
+          { displaySearchedLibraries.props.children !== null ? displaySearchedLibraries : displaySizeIncludedLibraries }
         </div>
         <Divider/>
       </div>
