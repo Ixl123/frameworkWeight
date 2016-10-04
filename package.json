@@ -1,7 +1,7 @@
 {
-  "name": "learn-redux",
+  "name": "frameworkweight",
   "version": "1.0.0",
-  "description": ":) ",
+  "description": "have fun",
   "scripts": {
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js --progress",
     "build": "npm run clean && npm run build:webpack",
@@ -16,11 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wesbos/Learn-Redux.git"
+    "url": "https://github.com/Ixl123/frameworkWeight"
   },
-  "author": "Wes Bos",
+  "author": "ixl123",
   "license": "MIT",
-  "homepage": "https://github.com/wesbos/Learn-Redux",
+  "homepage": "https://ixl123.github.io/frameworkWeight/",
   "dependencies": {
     "async": "^2.0.1",
     "babel-core": "^6.7.7",
