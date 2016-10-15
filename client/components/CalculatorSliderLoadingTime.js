@@ -6,6 +6,7 @@ import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 const {Grid, Row, Col} = require('react-flexbox-grid');
+import Divider from 'material-ui/Divider';
 
 const iconStyles = {
   marginRight: 24,
@@ -29,7 +30,10 @@ class CalculatorSliderLoadingTime extends React.Component {
   render() {
     const progress = this.props.progress;
     return (
+
       <div>
+        <h2>2. Select LoadingTime</h2>
+        <Divider/>
         <Grid>
           <Row>
             <Col

@@ -59,6 +59,18 @@ export function handleSearchRequest(searchedArray) {
     type: types.HANDLE_SEARCH_REQUEST,
     searchedArray
   }
+}
 
+export function proceedToNextStep(step) {
+  return {
+    type: types.PROCEED_TO_NEXT_STEP,
+    step
+  }
+}
+export function proceedToPreviousStep(step) {
+  return {
+    type: types.PROCEED_TO_PREVIOUS_STEP,
+    step
+  }
 
 }

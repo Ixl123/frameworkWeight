@@ -1,5 +1,5 @@
 const progress = {
-  'stepp': 0,
+  'step': 0,
   'loadingTime': 2,
   'sliderStepSize': 0.1,
   'sliderMaxValue': 10,

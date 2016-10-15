@@ -26,12 +26,12 @@ class Data {
     // store all data fetched from cdnjs 
     this.getLastModifiedDataDate(pathTocdnjsLibrariesFile, (myDate) => {
       if (this.checkDataDate(myDate)) {
-        let apiURL = 'https://api.cdnjs.com/libraries?fields=version,description,homepage';
+        let apiURL = 'https://api.cdnjs.com/libraries?fields=version,description,homepage,keywords,license,repository,autoupdate,author,assets';
         let path = './client/data/cdnjsLibraries.json';
         return fetch(apiURL)
           .then(response => response.json())
           //write file stringify parameter to pretty write
-          .then(json => this.writeFile(path, JSON.stringify(json, null, 2)))
+          .then(json => this.writeFile(path, JSON.stringify(json)))
       }
     })
     let editedcdnjsLibrariesPath = './client/data/editedcdnjsLibraries.json';
@@ -51,12 +51,15 @@ class Data {
             let editedResult = {};
             editedResult.size = size;
             editedResult.name = result.name;
-
             editedResult.latest = result.latest;
-
-            editedResult.version = result.version;;
+            editedResult.version = result.version;
+            editedResult.keywords = result.keywords;
             editedResult.description = result.description;
             editedResult.homepage = result.homepage;
+            editedResult.license = result.license;
+            editedResult.author = result.author;
+            editedResult.repository = result.repository;
+            editedResult.autoupdate = result.autoupdate;
             editedResult.favicon = result.homepage !== undefined ? 'https://s2.googleusercontent.com/s2/favicons?domain=' + result.homepage : '';
             // find position to update
             if (isLibraryIsIncludedIndex === -1) {
@@ -82,7 +85,7 @@ class Data {
 
     Promise.all(editedcdnjsLibraries).then(json => {
 
-      this.writeFile(editedcdnjsLibrariesPath, JSON.stringify(editedcdnjsLibrariesFile, null, 2))
+      this.writeFile(editedcdnjsLibrariesPath, JSON.stringify(editedcdnjsLibrariesFile))
       console.log('wrote new file')
     }, function(err) {
       console.log(err);
@@ -91,11 +94,11 @@ class Data {
 
   }
   /**
-   * checks 
-   * @param  {[type]} editedcdnjsLibrariesFile [description]
-   * @param  {[type]} resultName               [description]
-   * @param  {[type]} resultVersion            [description]
-   * @return {[type]}                          [description]
+   * compares the current library version and the latest verion on fetched cdnjs.
+   * @param  {[JSON]} editedcdnjsLibrariesFile local data json with all current libraries
+   * @param  {[String]} resultName               the name of the library of the fetched cdnjs
+   * @param  {[String]} resultVersion            the current version
+   * @return {[boolean]}                         true when not the same version (so an update will be needed) else false
    */
   checkLibraryAndVersion(editedcdnjsLibrariesFile, resultName, resultVersion) {
     for (let librariesObject of editedcdnjsLibrariesFile) {

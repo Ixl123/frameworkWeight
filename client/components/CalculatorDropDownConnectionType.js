@@ -1,7 +1,9 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+const {Grid, Row, Col} = require('react-flexbox-grid');
 
+import Divider from 'material-ui/Divider';
 
 const styles = {
   customWidth: {
@@ -29,7 +31,13 @@ class CalculatorDropDownConnectionType extends React.Component {
   render() {
     const progress = this.props.progress;
     return (
-      <div>
+      <Grid>
+        <Row>
+          <Col xs={ 12 }>
+          <h2>1. Select BandwidthType</h2>
+          </Col>
+        </Row>
+        <Divider/>
         <SelectField
                      value={ progress.selectedbandwidthType }
                      onChange={ this.handleChange }
@@ -40,9 +48,7 @@ class CalculatorDropDownConnectionType extends React.Component {
                                                                         value={ i }
                                                                         primaryText={ bandwidthType.name } />) }
         </SelectField>
-        <br />
-      </div>
-      );
+      </Grid>);
   }
 }
 export default CalculatorDropDownConnectionType;

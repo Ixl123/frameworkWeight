@@ -26,12 +26,11 @@ export default class LibrariesSelectionChips extends React.Component {
 
   render() {
     let libraries = this.props.libraries;
-
     let filteredLibraries = this.props.filteredLibraries;
     console.log(filteredLibraries);
     let displaySearchedLibraries = <div>
                                      { filteredLibraries.searchedLibraries !== undefined
-                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 100)
+                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 110)
                                          ? <Badge
                                                   key={ searchedLibrary.name }
                                                   badgeContent={ searchedLibrary.size + ' KB' }

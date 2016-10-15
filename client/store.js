@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { fetchLibrary } from './actions/actionCreators';
+import React from 'react';
 
 // import the root reducer
 
@@ -15,6 +16,10 @@ import thunkMiddleware from 'redux-thunk'
 
 import createLogger from 'redux-logger'
 
+// accessibility 
+// var a11y = require('react-a11y');
+
+
 const loggerMiddleware = createLogger()
 
 // create an object for the default data
@@ -27,6 +32,7 @@ const defaultState = {
 let middleware = [thunkMiddleware];
 // check for  build or dev version. include loggermiddlerware only in dev 
 if (process.env.NODE_ENV !== 'production') {
+  // a11y(React);
   middleware = [...middleware, loggerMiddleware];
 } else {
   middleware = [...middleware];

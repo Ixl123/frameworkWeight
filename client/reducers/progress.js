@@ -10,7 +10,6 @@ function progress(state = [], action) {
       return {
         ...state,
         selectedbandwidthType: action.selectedbandwidthType,
-        stepp: state.stepp === 2 ? 2 : 1,
         sliderDisabled: false
       }
     case types.SELECT_LOAD_SECONDS:
@@ -18,13 +17,22 @@ function progress(state = [], action) {
       return {
         ...state,
         loadingTime: action.loadingTime,
-        stepp: 2,
         seeResults: true
       }
     case types.CALCULATE_BUDGET:
       return {
         ...state,
         budget: action.budget
+      }
+    case types.PROCEED_TO_NEXT_STEP:
+      return {
+        ...state,
+        step: action.step
+      }
+    case types.PROCEED_TO_PREVIOUS_STEP:
+      return {
+        ...state,
+        step: action.step
       }
     default:
       return state;
