@@ -6,14 +6,10 @@ var Promise = require('es6-promise').Promise;
 const zlib = require('zlib');
 
 let fs = require('fs');
-let libraries = require('./client/data/libraries.js');
 let cdnjsLibraries = require('./client/data/cdnjsLibraries.json');
 let pathTocdnjsLibrariesFile = './client/data/cdnjsLibraries.json';
 let editedcdnjsLibrariesFile = require('./client/data/editedcdnjsLibraries.json');
-let libraries2;
-// import data
-// require('./client/data/libraries');
-// require('./client/data/progress');
+
 
 class Data {
   constructor() {}
@@ -171,12 +167,5 @@ class Data {
   }
 }
 let data = new Data({});
-//aAsync().then(() => bAsync()).then(() => cAsync()).done(() => finish);
 
-//data.fetchcdnjSpecificLibrary('jquery', 1).then((test) => console.log(test));
-
-// data.getLastModifiedDataDate('./client/data/libraries.js', (myDate) => data.checkDataDate(myDate));
-// console.log(test);
-// data.checkDataDate(test);
-// data.fetchEachLibraryFrom();
 data.getcdnjsAPIData();

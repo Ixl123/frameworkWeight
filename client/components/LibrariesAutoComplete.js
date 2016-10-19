@@ -2,7 +2,7 @@ import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-export default class AutoCompleteExampleSimple extends React.Component {
+export default class LibrariesAutoComplete extends React.Component {
 
   constructor(props) {
     super(props);

@@ -13,11 +13,9 @@ function progress(state = [], action) {
         sliderDisabled: false
       }
     case types.SELECT_LOAD_SECONDS:
-
       return {
         ...state,
         loadingTime: action.loadingTime,
-        seeResults: true
       }
     case types.CALCULATE_BUDGET:
       return {
@@ -34,6 +32,18 @@ function progress(state = [], action) {
         ...state,
         step: action.step
       }
+    case types.OPEN_LIBRARY_DIALOG:
+      return {
+        ...state,
+        libraryDialogOpened: action.libraryDialogOpened,
+        libraryDialogData: action.libraryDialogData
+      }
+    case types.CLOSE_LIBRARY_DIALOG:
+      return {
+        ...state,
+        libraryDialogOpened: action.libraryDialogOpened
+      }
+
     default:
       return state;
   }

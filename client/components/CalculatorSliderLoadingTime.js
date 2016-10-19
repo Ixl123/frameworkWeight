@@ -39,7 +39,13 @@ class CalculatorSliderLoadingTime extends React.Component {
       this.props.calculateBudget(this.props.progress.bandwidthTypes[this.props.progress.selectedbandwidthType].speed, loadingTime, this.props.progress.bandwidthTypes[this.props.progress.selectedbandwidthType].latency)
     }
   };
-
+  /**
+   * initial calculate budgetload with defaul slider value
+   * @return {[type]} [description]
+   */
+  componentDidMount = () => {
+    this.handleChange(this, this.props.progress.loadingTime);
+  };
   render() {
     const progress = this.props.progress;
     return (
@@ -59,7 +65,6 @@ class CalculatorSliderLoadingTime extends React.Component {
                   max={ progress.sliderMaxValue }
                   min={ progress.sliderMinValue }
                   disabled={ progress.sliderDisabled }
-                  required={ true }
                   onChange={ this.handleChange.bind(this) } />
           <p style={ item }>
             { progress.sliderMaxValue } seconds

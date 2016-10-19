@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import LibrariesSelectionChips from './LibrariesSelectionChips.js';
 import Divider from 'material-ui/Divider';
-import TableExampleComplex from './TableTest.js';
 const Libraries = React.createClass({
   render() {
     const progress = this.props.progress;

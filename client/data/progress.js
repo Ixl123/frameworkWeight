@@ -1,10 +1,14 @@
 const progress = {
   'step': 0,
-  'loadingTime': 2,
+  'loadingTime': 0.1,
   'sliderStepSize': 0.1,
   'sliderMaxValue': 10,
   'sliderMinValue': 0.1,
-  'sliderDisabled': true,
+  'sliderDisabled': false,
+  'selectedbandwidthType': -1,
+  'libraryDialogOpened': false,
+  'libraryDialogData': null,
+  'budget': '',
   'bandwidthTypes': [
     {
       name: 'GPRS (50 Kbps)',
@@ -50,9 +54,7 @@ const progress = {
       latency: 2
     },
   ],
-  'selectedbandwidthType': -1,
-  'seeResults': false,
-  'budget': ''
+
 
 };
 

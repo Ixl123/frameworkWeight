@@ -42,6 +42,7 @@ const styles = {
 };
 
 const Main = React.createClass({
+
   render() {
     return (
       <div>
@@ -49,7 +50,7 @@ const Main = React.createClass({
         <div style={ styles.dockedDrawerPadding }>
           <Paper style={ styles.paperContainer }>
             <Calculator {...this.props}/>
-            { this.props.progress.seeResults ? <Libraries {...this.props}/> : null }
+            <Libraries {...this.props}/>
             <FloatingActionButton
                                   onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToPreviousStep.bind(this, this.props.progress.step - 1) }

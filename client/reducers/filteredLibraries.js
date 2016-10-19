@@ -11,8 +11,6 @@ function filteredLibraries(state = [], action) {
         searchedLibraries: action.searchedArray
       }
     case types.HANDLE_SEARCH_REQUEST:
-      console.log(action.searchedArray);
-      debugger;
       return {
         ...state,
         searchedLibraries: action.searchedArray,
