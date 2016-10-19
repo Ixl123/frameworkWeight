@@ -2,6 +2,10 @@
 
 A simple React + Redux and Material-UI  app to calculate which framework fit into the budget.
 
+visit: https://ixl123.github.io/frameworkWeight/
+
+
+
 ## Running
 
 First `npm install` to grab all the necessary dependencies. 
