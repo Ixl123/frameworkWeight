@@ -20,7 +20,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     height: 300,
-    overflow: 'auto'
+    overflow: 'hidden'
   },
 };
 /**
@@ -92,7 +92,7 @@ export default class LibrariesSelectionChips extends React.Component {
                                                                } }>
                                              <Chip
                                                    style={ styles.chip }
-                                                   onClick={ this.handleOpen.bind(this, filteredLibraries.searchedLibrary[i]) }>
+                                                   onClick={ this.handleOpen.bind(this, filteredLibraries.searchedLibraries[i]) }>
                                                <Avatar
                                                        size={ 16 }
                                                        src={ searchedLibrary.favicon } />
@@ -131,7 +131,6 @@ export default class LibrariesSelectionChips extends React.Component {
 
     return (
       <div>
-        <h4>Frameworks</h4>
         <LibrariesAutoComplete {...this.props} />
         <div style={ styles.wrapper }>
           { displaySearchedLibraries.props.children !== null ? displaySearchedLibraries : displaySizeIncludedLibraries }
