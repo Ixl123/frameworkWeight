@@ -15,7 +15,7 @@ import { cyan500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import ActionBugReport from 'material-ui/svg-icons/action/bug-report';
-
+import IconButton from 'material-ui/IconButton';
 export default class DrawerStepper extends React.Component {
 
   constructor(props) {
@@ -32,7 +32,7 @@ export default class DrawerStepper extends React.Component {
   render() {
     const styles = {
       logo: {
-        cursor: 'pointer',
+
         fontSize: 24,
         color: typography.textFullWhite,
         lineHeight: `${spacing.desktopKeylineIncrement}px`,
@@ -42,7 +42,8 @@ export default class DrawerStepper extends React.Component {
         marginBottom: 8,
       },
       gitLogo: {
-        margin: 12,
+        marginRight: 40,
+        marginBottom: 8
       }
 
     };
@@ -51,15 +52,16 @@ export default class DrawerStepper extends React.Component {
         <AppBar
                 title="FRAMEWORKWEIGHT"
                 onLeftIconButtonTouchTap={ this.handleToggle }
-                iconElementRight={ <FlatButton
-                                               href="https://github.com/Ixl123/frameworkWeight"
-                                               secondary={ true }
-                                               icon={ <ActionBugReport /> }
-                                               style={ styles.gitLogo } /> } />
+                iconElementRight={ <IconButton
+                                               tooltip="go to git project"
+                                               style={ styles.gitLogo }>
+                                     <FlatButton
+                                                 href="https://github.com/Ixl123/frameworkWeight"
+                                                 secondary={ true }
+                                                 icon={ <ActionBugReport /> } />
+                                   </IconButton> } />
         <Drawer open={ this.state.open }>
-          <div
-               style={ styles.logo }
-               onTouchTap={ this.handleTouchTapHeader }>
+          <div style={ styles.logo }>
             Steps
           </div>
           <ProgressStepper {...this.props}></ProgressStepper>

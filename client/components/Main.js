@@ -8,6 +8,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import ArrowBackward from 'material-ui/svg-icons/navigation/arrow-back';
 import Paper from 'material-ui/Paper';
+import IconButton from 'material-ui/IconButton';
+
 const styles = {
   styleLeft: {
     margin: 0,
@@ -52,6 +54,7 @@ const Main = React.createClass({
             <Calculator {...this.props}/>
             <Libraries {...this.props}/>
             <FloatingActionButton
+                                  title="go to previous step"
                                   onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToPreviousStep.bind(this, this.props.progress.step - 1) }
                                   style={ styles.styleRight }
@@ -59,6 +62,7 @@ const Main = React.createClass({
               <ArrowBackward />
             </FloatingActionButton>
             <FloatingActionButton
+                                  title="go to next step"
                                   onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   style={ styles.styleLeft }

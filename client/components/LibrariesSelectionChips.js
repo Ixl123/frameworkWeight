@@ -15,12 +15,12 @@ import { List, ListItem } from 'material-ui/List';
 const styles = {
   chip: {
     margin: 4,
+    cursor: 'pointer',
   },
   wrapper: {
     display: 'flex',
     flexWrap: 'wrap',
-    height: 300,
-    overflow: 'hidden'
+
   },
 };
 /**
@@ -52,16 +52,131 @@ export default class LibrariesSelectionChips extends React.Component {
     let filteredLibraries = this.props.filteredLibraries;
     let progress = this.props.progress;
     if (progress.libraryDialogData !== null) {
-      for (var key in progress.libraryDialogData) {
-        if (progress.libraryDialogData.hasOwnProperty(key)) {
-          library.push(progress.libraryDialogData[key] !== null ? <ListItem
-                                                                            key={ key }
-                                                                            primaryText={ key }
-                                                                            secondaryText={ JSON.stringify(progress.libraryDialogData[key]) }>
-                                                                  </ListItem> : null);
-        }
+
+      if (progress.libraryDialogData.name !== null) {
+        library.push(
+          <h4 key={ progress.libraryDialogData.name }>{ `${progress.libraryDialogData.name}` }</h4>
+        );
       }
+      if (progress.libraryDialogData.size !== null) {
+        library.push(<div
+                          key={ 1 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text--bold">
+                           Size
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <p>
+                           { `${progress.libraryDialogData.size} KB` }
+                         </p>
+                       </div>
+                     </div>);
+      }
+      if (progress.libraryDialogData.author !== null) {
+        library.push(<div
+                          key={ 2 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text dl-text--bold">
+                           Author
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text">
+                           { `${progress.libraryDialogData.author.name !== undefined ? progress.libraryDialogData.author.name : progress.libraryDialogData.author}` }
+                         </p>
+                       </div>
+                     </div>);
+      }
+      if (progress.libraryDialogData.latest !== null) {
+        library.push(<div
+                          key={ 3 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text dl-text--bold">
+                           Latest
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <a
+                            className="dl-text dl-text--href"
+                            href={ progress.libraryDialogData.latest }>
+                           { `${progress.libraryDialogData.latest}` }
+                         </a>
+                       </div>
+                     </div>);
+      }
+      if (progress.libraryDialogData.version !== null) {
+        library.push(<div
+                          key={ 4 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text dl-text--bold">
+                           Version
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text">
+                           { `${progress.libraryDialogData.version}` }
+                         </p>
+                       </div>
+                     </div>);
+      }
+      if (progress.libraryDialogData.keywords !== null) {
+        library.push(<div
+                          key={ 5 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text dl-text--bold">
+                           Keywords
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text">
+                           { `${progress.libraryDialogData.keywords}` }
+                         </p>
+                       </div>
+                     </div>);
+      }
+      if (progress.libraryDialogData.description !== null) {
+        library.push(<div
+                          key={ 6 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text dl-text--bold">
+                           Description
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text">
+                           { `${progress.libraryDialogData.description}` }
+                         </p>
+                       </div>
+                     </div>);
+      }
+      if (progress.libraryDialogData.repository !== null) {
+        library.push(<div
+                          key={ 7 }
+                          className="dl-item dl-item--row">
+                       <div className="dl-data dl-data--row">
+                         <p className="dl-text dl-text--bold">
+                           GitUrl
+                         </p>
+                       </div>
+                       <div className="dl-data dl-data--row">
+                         <a
+                            className="dl-text dl-text--href"
+                            href={ progress.libraryDialogData.repository.url }>
+                           { `${progress.libraryDialogData.repository.url}` }
+                         </a>
+                       </div>
+                     </div>);
+      }
+
     }
+
 
 
 
@@ -78,7 +193,7 @@ export default class LibrariesSelectionChips extends React.Component {
 
     let displaySearchedLibraries = <div>
                                      { filteredLibraries.searchedLibraries !== undefined
-                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 110)
+                                       ? filteredLibraries.searchedLibraries.map((searchedLibrary, i) => (searchedLibrary.size <= this.props.progress.budget && i <= 50)
                                          ? <Badge
                                                   key={ searchedLibrary.name }
                                                   badgeContent={ searchedLibrary.size + ' KB' }
@@ -137,15 +252,12 @@ export default class LibrariesSelectionChips extends React.Component {
         </div>
         <Divider/>
         <Dialog
-                title="Library Details"
                 actions={ actions }
                 modal={ false }
                 open={ this.props.progress.libraryDialogOpened }
                 onRequestClose={ this.handleClose }
                 autoScrollBodyContent={ true }>
-          <List>
-            { library }
-          </List>
+          { library }
         </Dialog>
       </div>
       );

@@ -6,44 +6,70 @@ body
   background offwhite
   font-size:62.5%
   
+.dl-item 
+    display: -webkit-flex
+    display: -ms-flexbox
+    display: flex
+    padding-left: 15px
+    border-bottom: 1px solid #E1E1E1
+    position: relative
+.dl-item:last-child 
+    border-bottom: none
 
-.example-enter 
-  font-size: 12px
-  transition: font-size 1s ease-out
+.dl-item--row 
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
+    
+.dl-text--bold 
+    font-weight: bolder
+.dl-data--row 
+    width: 50%
+    
+.dl-item a 
+    text-decoration: none
+    
+.dl-text 
+    font-weight: lighter
+    padding: 0
+    overflow: hidden
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 
+.dl-text--href 
+    display: block
+    text-decoration: none
+    color: rgb(0, 188, 212)
 
-.example-enter.example-enter-active 
-    font-size: 1em
-
-
-.example-leave 
-  opacity: 1
-  transition: opacity .5s ease-in
-
-
-.example-leave.example-leave-active 
-  opacity: 0.01
-
-
-.example-appear 
-  opacity: 0.01
-  transition: opacity 5s ease-in
-
-
-.example-appear.example-appear-active 
-  opacity: 1
+.nextButton
+    margin: 0
+    top: 'auto'
+    right: 20
+    bottom: 20
+    left: 'auto'
+    position: 'fixed'
   
-.background-enter 
-  transform: translate(100%)
-
-.background-enter.background-enter-active 
-  transform: translate(0%)
-  transition: transform 1000ms ease-in-out
-
-.background-leave 
-  transform: translate(0%)
-
-.background-leave.background-leave-active 
-  transform: translate(-100%)
-  transition: transform 1000ms ease-in-out
+.prevButton
+    margin: 0
+    top: 'auto'
+    right: 'auto'
+    bottom: 20
+    left: 275
+    position: 'fixed'
+  
+.dockedDrawerPadding
+    padding-left: 256
+    margin-top: 48
+    margin-left: 80
+    margin-right: 80
+    margin-bottom: 48
+  
+.paperContainer
+    padding-top: 24
+    padding-left: 40
+    padding-right: 40
+    padding-bottom: 24
+  
 

@@ -15,7 +15,7 @@ class ProgressStepper extends React.Component {
     return (
       <div style={ { width: '100%', maxWidth: 900, margin: 'auto' } }>
         <Stepper
-                 linear={ false }
+                 linear={ true }
                  orientation="vertical"
                  activeStep={ this.props.progress.step }
                  style={ { boxSizing: 'content-box' } }>

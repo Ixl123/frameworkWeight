@@ -49,6 +49,7 @@ class CalculatorSliderLoadingTime extends React.Component {
   render() {
     const progress = this.props.progress;
     return (
+
       <div>
         <h2>2. Select LoadingTime</h2>
         <Divider/>
