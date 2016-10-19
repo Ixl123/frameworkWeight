@@ -8,50 +8,64 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import ArrowBackward from 'material-ui/svg-icons/navigation/arrow-back';
 import Paper from 'material-ui/Paper';
-const {Grid, Row, Col} = require('react-flexbox-grid');
-const styleRight = {
-  margin: 0,
-  top: 'auto',
-  right: 400,
-  bottom: 20,
-  left: 'auto',
-  position: 'fixed',
+const styles = {
+  styleLeft: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+  },
+  styleRight: {
+    margin: 0,
+    top: 'auto',
+    right: 'auto',
+    bottom: 20,
+    left: 275,
+    position: 'fixed'
+  },
+  dockedDrawerPadding: {
+    paddingLeft: 256,
+    marginTop: 48,
+    marginLeft: 80,
+    marginRight: 80,
+    marginBottom: 48,
+  },
+  paperContainer: {
+    paddingTop: 24,
+    paddingLeft: 40,
+    paddingRight: 40,
+    paddingBottom: 24,
+
+  },
 };
-const styleLeft = {
-  margin: 0,
-  top: 'auto',
-  right: 'auto',
-  bottom: 20,
-  left: 500,
-  position: 'fixed',
-};
+
 const Main = React.createClass({
   render() {
     return (
       <div>
         <FrameworkWeightAppBar {...this.props}/>
-        <Grid>
-          <Row>
-            <Col
-                 xs={ 12 }
-                 md={ 12 }>
+        <div style={ styles.dockedDrawerPadding }>
+          <Paper style={ styles.paperContainer }>
             <Calculator {...this.props}/>
             { this.props.progress.seeResults ? <Libraries {...this.props}/> : null }
-            </Col>
             <FloatingActionButton
+                                  onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToPreviousStep.bind(this, this.props.progress.step - 1) }
-                                  style={ styleLeft }
+                                  style={ styles.styleRight }
                                   disabled={ (this.props.progress.step > 0) ? false : true }>
               <ArrowBackward />
             </FloatingActionButton>
             <FloatingActionButton
+                                  onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
-                                  style={ styleRight }
+                                  style={ styles.styleLeft }
                                   disabled={ (this.props.progress.step < 2 & this.props.progress.selectedbandwidthType >= 0) ? false : true }>
               <ArrowForward />
             </FloatingActionButton>
-          </Row>
-        </Grid>
+          </Paper>
+        </div>
       </div>
     )
   }

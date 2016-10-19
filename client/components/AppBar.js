@@ -44,6 +44,7 @@ export default class DrawerStepper extends React.Component {
       gitLogo: {
         margin: 12,
       }
+
     };
     return (
       <div>

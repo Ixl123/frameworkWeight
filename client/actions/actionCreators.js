@@ -62,6 +62,7 @@ export function handleSearchRequest(searchedArray) {
 }
 
 export function proceedToNextStep(step) {
+
   return {
     type: types.PROCEED_TO_NEXT_STEP,
     step
