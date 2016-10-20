@@ -17,4 +17,4 @@ Then run `npm start` and open <localhost:7770> in your browser.
 Run `npm build` to create a distro folder and a bundle.js file.
 
 ## How to use it
-![Alt text](howTo.gif?raw=true "how to use this app")
+<img src="https://raw.githubusercontent.com/Ixl123/frameworkWeight/master/howTo.gif" width="80%">
