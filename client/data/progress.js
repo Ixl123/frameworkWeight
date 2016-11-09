@@ -9,6 +9,9 @@ const progress = {
   'libraryDialogOpened': false,
   'libraryDialogData': null,
   'budget': '',
+  'actualBudget': 0,
+  'visibilityFilter': 'SHOW_ALL_INCLUDED',
+  'searchedString': '',
   'bandwidthTypes': [
     {
       name: 'GPRS (50 Kbps)',

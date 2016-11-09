@@ -2,12 +2,12 @@ import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
+import ActionHomeIcon from 'material-ui/svg-icons/action/home';
+import IconButton from 'material-ui/IconButton';
 export default class LibrariesAutoComplete extends React.Component {
 
   constructor(props) {
     super(props);
-
-
   }
   /**
    * gets triggered on every input
@@ -15,11 +15,18 @@ export default class LibrariesAutoComplete extends React.Component {
    * @return {[type]}       [description]
    */
   handleUpdateInput = (searchText) => {
+    debugger;
+    let indicesArray = [];
     if (this.props.libraries !== undefined && this.props.libraries.length > 0) {
-      let searchedLibraryArray = this.props.libraries.filter(value => value !== undefined && value.name.search(searchText) >= 0);
-      this.props.handleSearchInput(searchedLibraryArray);
+      this.props.libraries.forEach(
+        (value, index) => {
+          if (value !== undefined && value.name.search(searchText) >= 0) {
+            indicesArray.push(index);
+          }
+        })
     }
-  }
+    this.props.handleSearchInput(indicesArray, searchText);
+  };
   /**
    * gets triggered on autocomplete seleciton or pressing enter
    * @param  {[type]} value [description]
@@ -31,13 +38,14 @@ export default class LibrariesAutoComplete extends React.Component {
 
     //check wheter realy a autocomplete index got selected also gets triggered when pressing enter then dont do anyhting
     if (index !== -1) {
-      let searchedLibrary = [];
-      searchedLibrary.push(this.props.libraries[index]);
-      this.props.handleSearchRequest(searchedLibrary);
-
+      // let searchedLibrary = [];
+      // searchedLibrary.push(this.props.libraries[index]);
+      this.props.handleSearchRequest(index, value);
+    } else {
+      // empty search reset
+      debugger;
+      this.handleUpdateInput(value)
     }
-
-
   };
 
   render() {
@@ -47,21 +55,25 @@ export default class LibrariesAutoComplete extends React.Component {
       <div>
         <AutoComplete
                       floatingLabelText="Search for a framework"
-                      dataSource={ libraries.map(library => {
+                      dataSource={ libraries.map((library) => {
                                      if (library.size < progress.budget) {
                                        return library.name
                                      }
                                    }) }
+                      filter={ AutoComplete.caseInsensitiveFilter }
                       maxSearchResults={ 8 }
+                      searchText={ progress.searchedString === '' ? '' : progress.searchedString }
                       onUpdateInput={ this.handleUpdateInput }
                       onNewRequest={ this.handleNewRequest }
                       style={ { marginBottom: 30 } } />
         <Subheader>
           Libraries
+          <IconButton tooltip="SVG Icon">
+            <ActionHomeIcon />
+          </IconButton>
         </Subheader>
         <Divider/>
       </div>
-
       );
   }
 }

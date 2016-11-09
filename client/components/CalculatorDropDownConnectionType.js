@@ -15,16 +15,17 @@ const styles = {
 class CalculatorDropDownConnectionType extends React.Component {
 
   /**
-   * handles selection change of the dropdown component
+   * handles selection change of the dropdown component.
    * @param  {Object} event the actual event.
    * @param  {Number} index the selected index 
    * @param  {String} value the selected string value
    */
   handleChange = (event, index, value) => {
     if (this.props.progress.selectedbandwidthType >= 0 && this.props.progress.loadingTime >= 0) {
+      // speed in ms, loadingtime in seconds and latency in ms
       this.props.calculateBudget(this.props.progress.bandwidthTypes[value].speed, this.props.progress.loadingTime, this.props.progress.bandwidthTypes[value].latency)
     }
-    this.props.selectBandwidth(event, index, value)
+    this.props.selectBandwidth(value)
   };
   render() {
     const progress = this.props.progress;

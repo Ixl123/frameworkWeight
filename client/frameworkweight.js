@@ -4,10 +4,7 @@ import { render } from 'react-dom';
 
 // Import css
 import css from './styles/style.styl';
-
 // Import components
-
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // import material design

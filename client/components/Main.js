@@ -9,7 +9,7 @@ import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import ArrowBackward from 'material-ui/svg-icons/navigation/arrow-back';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
-
+import keydown from 'react-keydown';
 const styles = {
   styleLeft: {
     margin: 0,
@@ -43,7 +43,28 @@ const styles = {
   },
 };
 
-const Main = React.createClass({
+class Main extends React.Component {
+  /**
+   * wrapper do react on arrow key right and left
+   */
+  @keydown('right', 'left') // or specify `which` code directly, in this case 13 
+  submit(event) {
+    if (event.keyCode === 39) {
+      // do something, or not, with the keydown event, maybe event.preventDefault() 
+      if (this.props.progress.step < 2 & this.props.progress.selectedbandwidthType >= 0) {
+        this.props.proceedToNextStep(this.props.progress.step + 1);
+      }
+
+    }
+    if (event.keyCode === 37) {
+      // do something, or not, with the keydown event, maybe event.preventDefault() 
+      if (this.props.progress.step > 0) {
+        this.props.proceedToPreviousStep(this.props.progress.step - 1);
+      }
+    }
+  }
+
+
 
   render() {
     return (
@@ -55,7 +76,6 @@ const Main = React.createClass({
             <Libraries {...this.props}/>
             <FloatingActionButton
                                   title="go to previous step"
-                                  onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToPreviousStep.bind(this, this.props.progress.step - 1) }
                                   style={ styles.styleRight }
                                   disabled={ (this.props.progress.step > 0) ? false : true }>
@@ -63,7 +83,6 @@ const Main = React.createClass({
             </FloatingActionButton>
             <FloatingActionButton
                                   title="go to next step"
-                                  onKeyPress={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   onClick={ this.props.proceedToNextStep.bind(this, this.props.progress.step + 1) }
                                   style={ styles.styleLeft }
                                   disabled={ (this.props.progress.step < 2 & this.props.progress.selectedbandwidthType >= 0) ? false : true }>
@@ -74,5 +93,5 @@ const Main = React.createClass({
       </div>
     )
   }
-});
+}
 export default Main;

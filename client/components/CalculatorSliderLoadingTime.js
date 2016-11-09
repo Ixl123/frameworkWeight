@@ -33,7 +33,7 @@ class CalculatorSliderLoadingTime extends React.Component {
    */
   handleChange = (event, loadingTime) => {
 
-    this.props.selectLoadSeconds(event, loadingTime);
+    this.props.selectLoadSeconds(loadingTime);
 
     if (this.props.progress.selectedbandwidthType >= 0 && loadingTime > 0) {
       this.props.calculateBudget(this.props.progress.bandwidthTypes[this.props.progress.selectedbandwidthType].speed, loadingTime, this.props.progress.bandwidthTypes[this.props.progress.selectedbandwidthType].latency)

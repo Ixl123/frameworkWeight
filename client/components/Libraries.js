@@ -8,10 +8,12 @@ const Libraries = React.createClass({
     return (
       <div className="libraries">
         { progress.step === 2 ?
+          
           <div>
-            <h2>Results</h2>
+            <h2>3.Results</h2>
             <Divider/>
-            <span><h3>Your total budget:</h3> <h2>{ this.props.progress.budget }KB</h2></span>
+            <span><h4>Total budget:</h4> <h3>{ this.props.progress.budget }KB</h3></span>
+            <span><h4>Actual budget:</h4> <h3>{ this.props.progress.actualBudget } KB</h3></span>
             <p>
               Frontend libraries which fit in this budget (only the first 50 are displayed at the same time feel free to search for a specific framework.)
             </p>

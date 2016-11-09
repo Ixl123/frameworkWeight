@@ -42,8 +42,7 @@ export default class DrawerStepper extends React.Component {
         marginBottom: 8,
       },
       gitLogo: {
-        marginRight: 40,
-        marginBottom: 8
+        marginRight: 60,
       }
 
     };
@@ -54,11 +53,9 @@ export default class DrawerStepper extends React.Component {
                 onLeftIconButtonTouchTap={ this.handleToggle }
                 iconElementRight={ <IconButton
                                                tooltip="go to git project"
-                                               style={ styles.gitLogo }>
-                                     <FlatButton
-                                                 href="https://github.com/Ixl123/frameworkWeight"
-                                                 secondary={ true }
-                                                 icon={ <ActionBugReport /> } />
+                                               style={ styles.gitLogo }
+                                               href="https://github.com/Ixl123/frameworkWeight">
+                                     <FontIcon className="fa fa-github" />
                                    </IconButton> } />
         <Drawer open={ this.state.open }>
           <div style={ styles.logo }>

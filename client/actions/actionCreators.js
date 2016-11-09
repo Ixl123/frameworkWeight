@@ -11,125 +11,114 @@
 import * as types from './ActionTypes.js';
 import fetch from 'isomorphic-fetch'
 import 'babel-polyfill'
-let gzip = require('gzip-js')
 
-
-// Select bandwidth
 /**
- * [selectBandwidth description]
- * @param  {[type]} event                 [description]
- * @param  {[type]} index                 [description]
- * @param  {[type]} selectedbandwidthType [description]
- * @param  {[type]}                       [description]
- * @return {[type]}                       [description]
+ * selects the bandtwidth
+ * @param  {Integer} selectedbandwidthType  the index of the bandwidth array value ranges from 0-8 zero for no selection
+ * @return {Action Object} with the action type SELECT_BANDWIDTH_TYP and the integer index
  */
-export function selectBandwidth(event, index, selectedbandwidthType,) {
-  return {
-    type: types.SELECT_BANDWIDTH_TYP,
-    selectedbandwidthType
-  }
-}
+export const selectBandwidth = (selectedbandwidthType) => ( {
+  type: types.SELECT_BANDWIDTH_TYP,
+  selectedbandwidthType
+});
 
-// Select loading time seconds
 /**
- * [selectLoadSeconds description]
- * @param  {[type]} event       [description]
- * @param  {[type]} loadingTime [description]
- * @return {[type]}             [description]
+ * Select loading time in seconds
+ * @param  {Float} loadingTime in seconds from min value 0.1 to 10
+ * @return {Action Object} with the Action of type SELECT_LOAD_SECONDS and loadingtime in seconds
  */
-export function selectLoadSeconds(event, loadingTime) {
-  return {
-    type: types.SELECT_LOAD_SECONDS,
-    loadingTime
-  }
-}
+export const selectLoadSeconds = (loadingTime) => ({
+  type: types.SELECT_LOAD_SECONDS,
+  loadingTime
+});
 
-//calculates the loading time provide seconds and bandwidth_typ_speed and latency in ms
 /**
- * [calculateBudget description]
- * @param  {[type]} loadingTime           [description]
- * @param  {[type]} selectedbandwidthType [description]
- * @param  {[type]} latency               [description]
- * @return {[type]}                       [description]
+ * calculates the loading time provide seconds and bandwidth_typ_speed and latency in ms
+ * @param  {Integer} bandwidthSpeed in milliseconds        
+ * @param  {Float} loadingTime in seconds from min value 0.1 to 10 
+ * @param  {Integer} latency of the selected bandtwidth 
+ * @return {Action Object} with the calculated budget value and the action of type CALCULATE_BUDGET
  */
-export function calculateBudget(loadingTime, selectedbandwidthType, latency) {
-  let budget = Math.round(((loadingTime + (latency / 1000)) * selectedbandwidthType) / 8);
+export function calculateBudget(bandwidthSpeed, loadingTime, latency) {
+  let budget = Math.round(((loadingTime + (latency / 1000)) * bandwidthSpeed) / 8);
   return {
     type: types.CALCULATE_BUDGET,
     budget
   }
 }
 
-//handle search input which gets triggers on every keystroke.
 /**
- * handle search input which gets triggers on every keystroke
- * @param  {Array} searchedArray an array with all the elements which contained the searched string
- * @return {[type]}               [description]
+ * handle search input which gets triggers on every keystroke.
+ * @param  {Array} indicesArray an array with all integer values which represent the indices which contained the searched string
+ * @return {Action Object} Array object.
  */
-export function handleSearchInput(searchedArray) {
+export const handleSearchInput = (indicesArray, searchedString) => ({
+  type: types.HANDLE_SEARCH_INPUT,
+  indicesArray,
+  searchedString
+});
 
-  return {
-    type: types.HANDLE_SEARCH_INPUT,
-    searchedArray
-  }
-}
-
-// handle search request which gets only triggered if autocomplete field gets selected
 /**
- * [handleSearchRequest description]
+ * handle search request which gets only triggered if autocomplete field gets selected
  * @param  {[type]} searchedArray [description]
  * @return {[type]}               [description]
  */
-export function handleSearchRequest(searchedArray) {
-  return {
-    type: types.HANDLE_SEARCH_REQUEST,
-    searchedArray
-  }
-}
+export const handleSearchRequest = (index, searchedString) => ({
+  type: types.HANDLE_SEARCH_REQUEST,
+  index,
+  searchedString
+});
 /**
  * [proceedToNextStep description]
  * @param  {[type]} step [description]
  * @return {[type]}      [description]
  */
-export function proceedToNextStep(step) {
-
-  return {
-    type: types.PROCEED_TO_NEXT_STEP,
-    step
-  }
-}
+export const proceedToNextStep = (step) => ({
+  type: types.PROCEED_TO_NEXT_STEP,
+  step
+});
 /**
  * [proceedToPreviousStep description]
  * @param  {[type]} step [description]
  * @return {[type]}      [description]
  */
-export function proceedToPreviousStep(step) {
-  return {
-    type: types.PROCEED_TO_PREVIOUS_STEP,
-    step
-  }
-}
+export const proceedToPreviousStep = (step) => ({
+  type: types.PROCEED_TO_PREVIOUS_STEP,
+  step
+});
 /**
  * [openLibraryDialog description]
  * @param  {[type]} openedLibrary         [description]
  * @param  {[type]} libraryDialogOpened [description]
  * @return {[type]}                       [description]
  */
-export function openLibraryDialog(libraryDialogOpened, libraryDialogData) {
-  return {
-    type: types.OPEN_LIBRARY_DIALOG,
-    libraryDialogOpened,
-    libraryDialogData
-  }
-}
+export const openLibraryDialog = (libraryDialogOpened, libraryDialogData) => ({
+  type: types.OPEN_LIBRARY_DIALOG,
+  libraryDialogOpened,
+  libraryDialogData
+});
 /**
  * [closeLibraryDialog description]
  * @param  {[type]} libraryDialogOpened [description]
  * @return {[type]}                       [description]
  */
-export function closeLibraryDialog(libraryDialogOpened) {
-  return {
-    type: types.CLOSE_LIBRARY_DIALOG,
-    libraryDialogOpened
-  }
-}
+export const closeLibraryDialog = (libraryDialogOpened) => ( {
+  type: types.CLOSE_LIBRARY_DIALOG,
+  libraryDialogOpened
+});
+
+/**
+ * ads or deletes the budget of the selected framework
+ * @param  {[type]} libraryDialogOpened [description]
+ * @return {[type]}                     [description]
+ */
+export const toggleLibrary = (index) => ({
+  type: types.TOGGLE_LIBRARY,
+  index
+});
+
+
+export const addToActualBudget = (actualBudget) => ({
+  type: types.ADD_TO_ACTUAL_BUDGET,
+  actualBudget
+});
