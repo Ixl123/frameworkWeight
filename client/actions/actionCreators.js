@@ -39,7 +39,7 @@ export const selectLoadSeconds = (loadingTime) => ({
  * @param  {Integer} latency of the selected bandtwidth 
  * @return {Action Object} with the calculated budget value and the action of type CALCULATE_BUDGET
  */
-export function calculateBudget(bandwidthSpeed, loadingTime, latency) {
+export const calculateBudget = (bandwidthSpeed, loadingTime, latency) => {
   let budget = Math.round(((loadingTime + (latency / 1000)) * bandwidthSpeed) / 8);
   return {
     type: types.CALCULATE_BUDGET,
@@ -116,7 +116,6 @@ export const toggleLibrary = (index) => ({
   type: types.TOGGLE_LIBRARY,
   index
 });
-
 
 export const addToActualBudget = (actualBudget) => ({
   type: types.ADD_TO_ACTUAL_BUDGET,

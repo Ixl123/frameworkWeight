@@ -22,7 +22,6 @@ function mapStateToProps(state) {
  * @return {Object} all actions which we have defined mapped to react props
  */
 function mapDispatchToProps(dispatch) {
-
   return bindActionCreators(actionCreators, dispatch);
 }
 

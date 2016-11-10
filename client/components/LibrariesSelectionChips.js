@@ -60,12 +60,25 @@ export default class LibrariesSelectionChips extends React.Component {
         return library;
       }
     })
-    let actualBudget = 0;
-    includedLibraries.forEach((library) => {
-      actualBudget += library.size;
-    });
-    debugger;
-    this.props.addToActualBudget(Math.round(actualBudget * 10) / 10);
+    //refactor this.
+    setTimeout(() => {
+
+      let actualBudget = 0;
+      includedLibraries = this.props.libraries.filter((library) => {
+        if (library.included) {
+          return library;
+        }
+      })
+      includedLibraries.forEach((library) => {
+        actualBudget += library.size;
+      });
+      this.props.addToActualBudget(Math.round(actualBudget * 10) / 10);
+
+    }, 100);
+
+
+
+
   };
   getVisibleLibraries = (libraries, filter) => {
 
