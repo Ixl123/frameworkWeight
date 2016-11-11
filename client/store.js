@@ -46,7 +46,7 @@ const enhancers = compose(
 const persistedState = loadState();
 
 const store = createStore(rootReducer,
-  persistedState === undefined && process.env.NODE_ENV !== 'production' ? defaultState : persistedState,
+  persistedState === undefined && process.env.NODE_ENV === 'production' ? defaultState : persistedState,
   enhancers);
 // only write to localstorage once a second 
 store.subscribe(throttle(() => {

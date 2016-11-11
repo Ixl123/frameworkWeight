@@ -57,8 +57,6 @@ const progress = {
       latency: 2
     },
   ],
-
-
 };
 
 
