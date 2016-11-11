@@ -58,8 +58,25 @@ function progress(state = [], action) {
         ...state,
         visibilityFilter: 'SHOW_ALL_INCLUDED_AND_INPUT_SEARCH',
         searchedString: action.searchedString
-
       }
+    case types.HANDLE_SELECTED_LIBRARY_FILTER:
+      if (state.visibilityFilter !== 'SHOW_USERS_SELECTED') {
+        return {
+          ...state,
+          visibilityFilter: 'SHOW_USERS_SELECTED'
+        }
+      } else if (state.visibilityFilter !== 'SHOW_ALL_INCLUDED_AND_INPUT_SEARCH') {
+        return {
+          ...state,
+          visibilityFilter: 'SHOW_ALL_INCLUDED_AND_INPUT_SEARCH'
+        }
+      } else {
+        return {
+          ...state,
+          visibilityFilter: 'SHOW_ALL_INCLUDED'
+        }
+      }
+
     default:
       return state;
   }

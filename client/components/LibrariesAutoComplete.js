@@ -4,6 +4,9 @@ import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import ActionHomeIcon from 'material-ui/svg-icons/action/home';
 import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import { cyan500 } from 'material-ui/styles/colors';
+
 export default class LibrariesAutoComplete extends React.Component {
 
   constructor(props) {
@@ -15,7 +18,6 @@ export default class LibrariesAutoComplete extends React.Component {
    * @return {[type]}       [description]
    */
   handleUpdateInput = (searchText) => {
-    debugger;
     let indicesArray = [];
     if (this.props.libraries !== undefined && this.props.libraries.length > 0) {
       this.props.libraries.forEach(
@@ -33,8 +35,6 @@ export default class LibrariesAutoComplete extends React.Component {
    * @return {[type]}       [description]
    */
   handleNewRequest = (value, index) => {
-    debugger;
-    console.log(value);
 
     //check wheter realy a autocomplete index got selected also gets triggered when pressing enter then dont do anyhting
     if (index !== -1) {
@@ -43,11 +43,12 @@ export default class LibrariesAutoComplete extends React.Component {
       this.props.handleSearchRequest(index, value);
     } else {
       // empty search reset
-      debugger;
       this.handleUpdateInput(value)
     }
   };
-
+  handleSelectedLibraryFilter = () => {
+    this.props.handleSelectedLibraryFilter();
+  }
   render() {
     const libraries = this.props.libraries;
     const progress = this.props.progress;
@@ -68,8 +69,12 @@ export default class LibrariesAutoComplete extends React.Component {
                       style={ { marginBottom: 30 } } />
         <Subheader>
           Libraries
-          <IconButton tooltip="SVG Icon">
-            <ActionHomeIcon />
+          <IconButton
+                      tooltip="filter selected libraries"
+                      onClick={ this.handleSelectedLibraryFilter }>
+            <FontIcon
+                      className="fa fa-filter"
+                      color={ progress.visibilityFilter === 'SHOW_USERS_SELECTED' ? cyan500 : null } />
           </IconButton>
         </Subheader>
         <Divider/>

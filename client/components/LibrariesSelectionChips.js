@@ -41,6 +41,7 @@ export default class LibrariesSelectionChips extends React.Component {
    * 
    */
   handleOpen = (library) => {
+    debugger;
     this.props.openLibraryDialog(true, library);
   };
   /**
@@ -95,6 +96,12 @@ export default class LibrariesSelectionChips extends React.Component {
             return library;
           }
         })
+      case 'SHOW_USERS_SELECTED':
+        return libraries.filter((library, i) => {
+          if (library.included === true) {
+            return library;
+          }
+        })
     }
   }
   render() {
@@ -104,7 +111,6 @@ export default class LibrariesSelectionChips extends React.Component {
     let progress = this.props.progress;
     let visibilityFilter = this.props.progress.visibilityFilter;
     if (progress.libraryDialogData !== null) {
-
       if (progress.libraryDialogData.name !== null) {
         library.push(
           <h4 key={ progress.libraryDialogData.name }>{ `${progress.libraryDialogData.name}` }</h4>
@@ -298,7 +304,7 @@ export default class LibrariesSelectionChips extends React.Component {
                                                                                                                                  backgroundColor={ cyan500 }
                                                                                                                                  style={ styles.chip }
                                                                                                                                  onRequestDelete={ () => this.handleRequestDelete(javaScriptLibrary) }
-                                                                                                                                 onTouchTap={ this.handleOpen.bind(this, libraries[i]) }>
+                                                                                                                                 onTouchTap={ this.handleOpen.bind(this, javaScriptLibrary) }>
                                                                                                                              { javaScriptLibrary.homepage === null ? <Avatar size={ 32 }>
                                                                                                                                                                        { javaScriptLibrary.name.charAt(0) }
                                                                                                                                                                      </Avatar> : <Avatar
@@ -309,7 +315,7 @@ export default class LibrariesSelectionChips extends React.Component {
                                                                                                                            </Chip> : <Chip
                                                                                                                                            style={ styles.chip }
                                                                                                                                            onRequestDelete={ () => this.handleRequestDelete(javaScriptLibrary) }
-                                                                                                                                           onTouchTap={ this.handleOpen.bind(this, libraries[i]) }>
+                                                                                                                                           onTouchTap={ this.handleOpen.bind(this, javaScriptLibrary) }>
                                                                                                                                        { javaScriptLibrary.homepage === null ? <Avatar size={ 32 }>
                                                                                                                                                                                  { javaScriptLibrary.name.charAt(0) }
                                                                                                                                                                                </Avatar> : <Avatar

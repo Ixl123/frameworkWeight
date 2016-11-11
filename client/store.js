@@ -15,10 +15,12 @@ import filteredLibraries from './data/filteredLibraries';
 import thunkMiddleware from 'redux-thunk'
 
 import createLogger from 'redux-logger'
-
+import { loadState, saveState } from './localStorage';
 // accessibility 
 // var a11y = require('react-a11y');
 
+// import throttle to only run save state function only once a second
+import throttle from 'lodash/throttle';
 
 const loggerMiddleware = createLogger()
 
@@ -41,8 +43,15 @@ const enhancers = compose(
   applyMiddleware(...middleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
+const persistedState = loadState();
 
-const store = createStore(rootReducer, defaultState, enhancers);
+const store = createStore(rootReducer,
+  persistedState === undefined && process.env.NODE_ENV !== 'production' ? defaultState : persistedState,
+  enhancers);
+// only write to localstorage once a second 
+store.subscribe(throttle(() => {
+  saveState(store.getState());
+}, 1000));
 
 if (module.hot) {
   module.hot.accept('./reducers/rootReducer', () => {

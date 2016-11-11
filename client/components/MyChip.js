@@ -50,7 +50,7 @@ var _EnhancedButton = require('material-ui/internal/EnhancedButton');
 
 var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-var _cancel = require('material-ui/svg-icons/action/done');
+var _cancel = require('material-ui/svg-icons/action/check-circle');
 
 var _cancel2 = _interopRequireDefault(_cancel);
 

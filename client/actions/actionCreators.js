@@ -113,11 +113,18 @@ export const closeLibraryDialog = (libraryDialogOpened) => ( {
  * @return {[type]}                     [description]
  */
 export const toggleLibrary = (index) => ({
+
   type: types.TOGGLE_LIBRARY,
   index
 });
 
+
 export const addToActualBudget = (actualBudget) => ({
   type: types.ADD_TO_ACTUAL_BUDGET,
   actualBudget
+});
+
+export const handleSelectedLibraryFilter = () => ({
+  type: types.HANDLE_SELECTED_LIBRARY_FILTER,
+
 });
