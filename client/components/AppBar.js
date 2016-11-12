@@ -24,7 +24,6 @@ export default class DrawerStepper extends React.Component {
       open: true
     };
   }
-
   handleToggle = () => this.setState({
     open: !this.state.open
   });

@@ -27,10 +27,21 @@ export const selectBandwidth = (selectedbandwidthType) => ( {
  * @param  {Float} loadingTime in seconds from min value 0.1 to 10
  * @return {Action Object} with the Action of type SELECT_LOAD_SECONDS and loadingtime in seconds
  */
-export const selectLoadSeconds = (loadingTime) => ({
-  type: types.SELECT_LOAD_SECONDS,
-  loadingTime
-});
+export const selectLoadSeconds = (loadingTime) => {
+
+  if (loadingTime >= 0.1 && loadingTime <= 10) {
+    return {
+      type: types.SELECT_LOAD_SECONDS,
+      loadingTime
+    }
+  } else {
+    loadingTime = 0.1
+    return {
+      type: types.SELECT_LOAD_SECONDS,
+      loadingTime
+    }
+  }
+};
 
 /**
  * calculates the loading time provide seconds and bandwidth_typ_speed and latency in ms
