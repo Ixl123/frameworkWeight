@@ -25,13 +25,13 @@ class Data {
         let apiURL = 'https://api.cdnjs.com/libraries?fields=version,description,homepage,keywords,license,repository,autoupdate,author,assets';
         let path = './client/data/cdnjsLibraries.json';
         return fetch(apiURL)
-          .then(response => response.json())
+          .then((response) => response.json())
           //write file stringify parameter to pretty write
-          .then(json => this.writeFile(path, JSON.stringify(json)))
+          .then((json) => this.writeFile(path, JSON.stringify(json)))
       }
     })
     let editedcdnjsLibrariesPath = './client/data/editedcdnjsLibraries.json';
-    let editedcdnjsLibraries = cdnjsLibraries.results.map(result => {
+    let editedcdnjsLibraries = cdnjsLibraries.results.map((result) => {
       // -1 for not found >= 0 for included
       let isLibraryIsIncludedIndex = editedcdnjsLibrariesFile.map(function(library) {
         return library.name
